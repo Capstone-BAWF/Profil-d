@@ -5,6 +5,7 @@ var bodyParser= require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 8080;
+var path = require('path');
 var User = require('./app/models/user');
 
 // Body parser module will allow us to grab information from POST requests
@@ -27,7 +28,7 @@ app.use(morgan('dev'));
 
 // Root page
 app.get('/', function(req, res){
-		res.send('Welcome to the home page!');
+		res.sendFile(path.join(__dirname +'/index.html'));
 });
 
 // Router for /api/ 
