@@ -29,9 +29,8 @@ angular.module('routerApp', ['routerRoutes'])
 			contact: 'ada77.chen@gmail.com',
 			pic: '/assets/images/ada.jpg' },
 		{ name: 'Fabio Francois', role: 'Back End Developer', 
-			bio: 'A candidate at Google, Fabio Francois plays a lot of games\
-				  when he is rarely working.',
-			contact: 'fabio.francois@gmail.com',
+			bio: 'vim > emacs',
+			contact: 'ffrancois749@gmail.com',
 			pic: '/assets/images/david.jpg' },	
 		{ name: 'Brandon Troche', role: 'Backend Developer', 
 			bio: 'Main focus is game development. Has a game on Apple\'s App Store\
