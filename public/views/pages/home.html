@@ -1,0 +1,11 @@
+<div class="jumbotron text-center" style="background:transparent">
+	<h1> Welcome! </h1>
+
+	<h2> Pick an option to start! </h2>
+
+</div>
+
+<div class="col-md-4 text-center" ng-repeat="title in home.titles">
+	<h4>{{ title.name }}</h4>
+	<button class="btn btn-default"> {{ title.function }} </button>
+</div>
