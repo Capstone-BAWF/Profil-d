@@ -25,6 +25,7 @@ print ("The size of the array is: " + str(tweetSize))
 print(twitters)
 print (len(Tweet))
 
+print ("The number of times each word was used: ")
 TweetAnalysis(words, tweetSize, twitters)
 
 """for index in twitters:
