@@ -20,12 +20,12 @@ angular.module('routerApp', ['routerRoutes'])
 	vm.members = [
 		{ name: 'William Wu', role: 'Full Stack Developer', 
 			bio: 'Interested in mobile development and experienced in full stack\
-				  development.',
+				  development and data science technology.',
 			contact: 'will.go.code@gmail.com',
 			pic: '/assets/images/will.jpg' },
 		{ name: 'Ada Chen', role: 'Front End Developer', 
 			bio: 'Recently came back from Miami. Continues to watch videos\
-				  on AngularJS.',
+				  on AngularJS. Currently dating Jimmy.',
 			contact: 'ada77.chen@gmail.com',
 			pic: '/assets/images/ada.jpg' },
 		{ name: 'Fabio Francois', role: 'Back End Developer', 
@@ -33,8 +33,9 @@ angular.module('routerApp', ['routerRoutes'])
 			contact: 'ffrancois749@gmail.com',
 			pic: '/assets/images/david.jpg' },	
 		{ name: 'Brandon Troche', role: 'Backend Developer', 
-			bio: 'Main focus is game development. Has a game on Apple\'s App Store\
-				  called Tap N Slash',
+			bio: 'Brandon is working on half of the backend. In addition to backend,\
+				  he also works well in iOS full stack development and Object \
+				  Oriented Development as a whole.',
 			contact: 'bttroche@gmail.com',
 			pic: '/assets/images/brandon.jpg' }
 	];
