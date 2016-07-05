@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 import tweepy
 from pymongo import MongoClient 
 
@@ -36,15 +37,35 @@ def print_tweet(tweet):
 #print_tweet(tweet)
 
 #change the value in items to choose the number of tweets to retrieve for this request
-results = []
-for tweet in tweepy.Cursor(api.user_timeline, screen_name="HillaryClinton").items(10):
-    results.append(tweet)
+clinton = []
+for tweet in tweepy.Cursor(api.user_timeline, screen_name="HillaryClinton").items(1000):
+    clinton.append(tweet)
+    
+bernie = []
+for tweet in tweepy.Cursor(api.user_timeline, screen_name="BernieSanders").items(1000):
+    bernie.append(tweet)
+    
+trump = []
+for tweet in tweepy.Cursor(api.user_timeline, screen_name="realDonaldTrump").items(1000):
+    trump.append(tweet)
 
 #print len(results)
 
-testfile = open("test1.txt","wb")
-for tweet in results:
-    testfile.write(tweet.text + "\n\n")
+hilfile = open("hillary.csv","wb")
+hilfile.write("name,time,tweets\n")
+for tweet in clinton:
+    hilfile.write(tweet.user.name + ',' + str(tweet.created_at.now()) + ',' + tweet.text +'\n')
+hilfile.close()
+
+bernfile = open("bernie.csv","wb")
+bernfile.write("name,time,tweets\n")
+for tweet in bernie:
+    bernfile.write(tweet.user.name + ',' + str(tweet.created_at.now()) + ',' + tweet.text +'\n')
+bernfile.close()    
     
+trumpfile = open("donny.csv","wb")
+trumpfile.write("name,time,tweets\n")
+for tweet in trump:
+    trumpfile.write(tweet.user.name + ',' + str(tweet.created_at.now()) + ',' + tweet.text +'\n')
+trumpfile.close()
 #    print(word.text)
-testfile.close()
