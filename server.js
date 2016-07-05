@@ -2,6 +2,7 @@
 var express = require('express');
 var app     = express();
 var path = require('path');
+var port = process.env.PORT || 8080;
 
 // set the public folder to serve public assets
 app.use(express.static(__dirname + '/public'));
@@ -12,5 +13,5 @@ app.get('*', function(req, res) {
 });
 
 // start the server on port 8080 (http://localhost:8080)
-app.listen(8080);
-console.log('Magic happens on port 8080.');
+app.listen(port);
+console.log('Magic happens on port ' + port);
