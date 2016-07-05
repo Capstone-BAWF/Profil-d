@@ -5,6 +5,7 @@ import tweepy
 from pymongo import MongoClient 
 
 client = MongoClient()
+db = client.test
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -54,18 +55,19 @@ for tweet in tweepy.Cursor(api.user_timeline, screen_name="realDonaldTrump").ite
 hilfile = open("hillary.csv","wb")
 hilfile.write("name,time,tweets\n")
 for tweet in clinton:
-    hilfile.write(tweet.user.name + ',' + str(tweet.created_at.now()) + ',' + tweet.text +'\n')
+    hilfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
 hilfile.close()
 
 bernfile = open("bernie.csv","wb")
 bernfile.write("name,time,tweets\n")
 for tweet in bernie:
-    bernfile.write(tweet.user.name + ',' + str(tweet.created_at.now()) + ',' + tweet.text +'\n')
+    bernfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
 bernfile.close()    
     
 trumpfile = open("donny.csv","wb")
 trumpfile.write("name,time,tweets\n")
 for tweet in trump:
-    trumpfile.write(tweet.user.name + ',' + str(tweet.created_at.now()) + ',' + tweet.text +'\n')
+    trumpfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
 trumpfile.close()
 #    print(word.text)
+
