@@ -23,7 +23,7 @@ angular.module('routerApp', ['routerRoutes'])
 				  development.',
 			contact: 'will.go.code@gmail.com',
 			pic: '/assets/images/will.jpg' },
-		{ name: 'Ada Wong', role: 'Front End Developer', 
+		{ name: 'Ada Chen', role: 'Front End Developer', 
 			bio: 'Recently came back from Miami. Continues to watch videos\
 				  on AngularJS.',
 			contact: 'ada77.chen@gmail.com',
@@ -33,7 +33,7 @@ angular.module('routerApp', ['routerRoutes'])
 				  when he is rarely working.',
 			contact: 'fabio.francois@gmail.com',
 			pic: '/assets/images/david.jpg' },	
-		{ name: 'Brandon Troche', role: 'iOS Developer', 
+		{ name: 'Brandon Troche', role: 'Backend Developer', 
 			bio: 'Main focus is game development. Has a game on Apple\'s App Store\
 				  called Tap N Slash',
 			contact: 'bttroche@gmail.com',
