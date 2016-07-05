@@ -38,36 +38,38 @@ def print_tweet(tweet):
 #print_tweet(tweet)
 
 #change the value in items to choose the number of tweets to retrieve for this request
+def add_tweets(arr, name):
+    for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(10):
+        arr.append(tweet)
+
 clinton = []
-for tweet in tweepy.Cursor(api.user_timeline, screen_name="HillaryClinton").items(1000):
-    clinton.append(tweet)
-    
+add_tweets(clinton,"HillaryClinton")
+
 bernie = []
-for tweet in tweepy.Cursor(api.user_timeline, screen_name="BernieSanders").items(1000):
-    bernie.append(tweet)
+add_tweets(bernie,"BernieSanders")
     
 trump = []
-for tweet in tweepy.Cursor(api.user_timeline, screen_name="realDonaldTrump").items(1000):
-    trump.append(tweet)
+add_tweets(trump,"realDonaldTrump")
+
 
 #print len(results)
 
+def write_to_file(openfile,arr):
+    openfile.write("name,time,tweets\n")
+    for tweet in arr:
+        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
+        
 hilfile = open("hillary.csv","wb")
-hilfile.write("name,time,tweets\n")
-for tweet in clinton:
-    hilfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
+write_to_file(hilfile,clinton)
 hilfile.close()
 
+'''
 bernfile = open("bernie.csv","wb")
-bernfile.write("name,time,tweets\n")
-for tweet in bernie:
-    bernfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
-bernfile.close()    
+write_to_file(bernfile,bernie)
+bernfile.close()
     
 trumpfile = open("donny.csv","wb")
-trumpfile.write("name,time,tweets\n")
-for tweet in trump:
-    trumpfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
+write_to_file(trumpfile,trump)
 trumpfile.close()
 #    print(word.text)
-
+'''
