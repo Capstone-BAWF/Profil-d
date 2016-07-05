@@ -1,6 +1,6 @@
 import sys
 
-def TweetAnalysis(SemanticDictionary, Size, TweetArray):
+def WordAnalysis(SemanticDictionary, Size, TweetArray):
 	for i in range(Size):
 		if(SemanticDictionary.has_key(TweetArray[i])):
 			SemanticDictionary[TweetArray[i]] += 1
@@ -8,6 +8,14 @@ def TweetAnalysis(SemanticDictionary, Size, TweetArray):
 			SemanticDictionary[TweetArray[i]] = 1
 	print SemanticDictionary
 
+def WordCount(SemanticDictionary):
+	tempLargest = 1
+	tempString = "All equally used"
+	for i in SemanticDictionary:
+		if SemanticDictionary[i] > tempLargest:
+			tempLargest = SemanticDictionary[i]
+			tempString = i
+	return tempString
 
 Tweet = ""
 while Tweet == "" or len(Tweet) > 150:
@@ -26,7 +34,8 @@ print(twitters)
 print (len(Tweet))
 
 print ("The number of times each word was used: ")
-TweetAnalysis(words, tweetSize, twitters)
+WordAnalysis(words, tweetSize, twitters)
+print ("The word that appeared the most was: " + WordCount(words))
 
 """for index in twitters:
 	print(index)"""
