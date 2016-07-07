@@ -17,6 +17,13 @@ def WordCount(SemanticDictionary):
 			tempString = i
 	return tempString
 
+#def DeterminerCount(TweetArray):
+	#generalDeterminers = ["the", "a", "an", "another", "no" , "'s", "my", "our", "their", "her"
+	#				, "his", "its", "each", "this", "that"]
+	#neutralDeterminers = ["certain", "there exist", "some of", "some"]
+	#absoluteDeterminers = ["any", "all", "every"]
+
+
 Tweet = ""
 while Tweet == "" or len(Tweet) > 150:
 	Tweet = raw_input("You should totally enter a tweet brah: ")
