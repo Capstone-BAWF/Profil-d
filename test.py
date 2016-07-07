@@ -44,21 +44,22 @@ def add_tweets(arr, name):
 
 clinton = []
 add_tweets(clinton,"HillaryClinton")
-
+'''
 bernie = []
 add_tweets(bernie,"BernieSanders")
     
 trump = []
 add_tweets(trump,"realDonaldTrump")
-
+'''
 
 #print len(results)
+chars_to_remove = [',']
 
 def write_to_file(openfile,arr):
     openfile.write("name,time,tweets\n")
     for tweet in arr:
-        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text +'\n')
-        
+        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',3) +'\n')
+
 hilfile = open("hillary.csv","wb")
 write_to_file(hilfile,clinton)
 hilfile.close()
