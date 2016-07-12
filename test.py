@@ -53,12 +53,11 @@ add_tweets(trump,"realDonaldTrump")
 '''
 
 #print len(results)
-chars_to_remove = [',']
 
 def write_to_file(openfile,arr):
     openfile.write("name,time,tweets\n")
     for tweet in arr:
-        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',10).replace('\n','',10) +'\n')
+        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',10).replace('\n',' ',10) +'\n')
 
 hilfile = open("hillary.csv","wb")
 write_to_file(hilfile,clinton)
