@@ -1,4 +1,4 @@
-angular.module('routerApp', ['routerRoutes'])
+angular.module('profild', ['routerRoutes'])
 
 .controller('mainController', function() {
 	var vm = this;
