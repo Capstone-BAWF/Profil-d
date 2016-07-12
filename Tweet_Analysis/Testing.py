@@ -27,6 +27,20 @@ def main():
 	print ("The word that appeared the most was: " + WordCount(words))
 
 
+	csvfile = open('bernie.csv', 'r')
+
+	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweet"))
+
+	for row in reader:
+		#print(', '.join(str(row)))
+		#print(row['name'], row['time'], row['tweet'])
+		Tweet = str("").join(str(row['name']))
+		print Tweet
+
+	csvfile.close()
+
+	print(reader)
+
 	"""for index in twitters:
 	print(index)"""
 
