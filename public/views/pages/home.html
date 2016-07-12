@@ -1,11 +1,27 @@
 <div class="jumbotron text-center" style="background:transparent">
 	<h1> Welcome! </h1>
-
 	<h2> Pick an option to start! </h2>
-
 </div>
 
-<div class="col-md-4 text-center" ng-repeat="title in home.titles">
-	<h4>{{ title.name }}</h4>
-	<button class="btn btn-info"> {{ title.function }} </button>
+<div class="col-md-4 text-center">
+  <button type="button" class="btn btn-info btn-lg"  data-toggle="collapse" data-target="#mode">Select a Mode</button>
+  <div id="mode" class="collapse">
+    cus im so bad at html this will have to do for now sorry williams
+  </div>
 </div>
+    
+<div class="col-md-4 text-center">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#candidates">Pick a Candidate</button>
+  <div id="candidates" class="collapse">
+    potential candidates ...
+  </div>
+</div>
+    
+<div class="col-md-4 text-center">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#results">Results</button>
+  <div id="results" class="collapse">
+    yay donald trump is bae
+  </div>
+</div>
+
+
