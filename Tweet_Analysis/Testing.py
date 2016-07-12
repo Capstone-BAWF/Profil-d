@@ -1,4 +1,9 @@
+#import os
 import sys
+import csv
+#import time
+#import tweepy
+#from pymongo import MongoClient 
 
 def main():
 	Tweet = ""
@@ -21,6 +26,7 @@ def main():
 	WordAnalysis(words, tweetSize, twitters)
 	print ("The word that appeared the most was: " + WordCount(words))
 
+
 	"""for index in twitters:
 	print(index)"""
 
@@ -42,6 +48,49 @@ def WordCount(SemanticDictionary):
 			tempLargest = SemanticDictionary[i]
 			tempString = i
 	return tempString
+
+def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs):
+	tf = termFrequencyInDoc.toDouble / totalTermsInDoc 
+	docFreq = totalDocs.toDouble / termFreqInCorpus 
+	idf = math.log(docFreq)
+	return tf*idf
+
+"""  
+import edu.stanford.nlp.pipeline._
+import edu.stanford.nlp.ling.CoreAnnotations._
+
+def createNLPPipeline(): StanfordCoreNLP = {
+	val props = new Properties()
+	props.put("annotators", "tokenize, ssplit, pos, lemma") new StanfordCoreNLP(props)
+}
+
+def isOnlyLetters(str: String): Boolean = { 
+
+	str.forall(c => Character.isLetter(c))
+
+}
+
+def plainTextToLemmas(text: String, stopWords: Set[String], pipeline: StanfordCoreNLP): Seq[String] = {
+	val doc = new Annotation(text) pipeline.annotate(doc)
+	val lemmas = new ArrayBuffer[String]()
+	val sentences = doc.get(classOf[SentencesAnnotation]) 
+	for (sentence <- sentences; token <- sentence.get(classOf[TokensAnnotation])): 
+		val lemma = token.get(classOf[LemmaAnnotation])
+		if (lemma.length > 2 && !stopWords.contains(lemma) && isOnlyLetters(lemma)):
+        	lemmas += lemma.toLowerCase
+ 	return lemmas
+}
+
+val stopWords = sc.broadcast(
+scala.io.Source.fromFile("stopwords.txt).getLines().toSet).value
+val lemmatized: RDD[Seq[String]] = plainText.mapPartitions(it => { val pipeline = createNLPPipeline()
+it.map { case(title, contents) =>
+        plainTextToLemmas(contents, stopWords, pipeline)
+      }
+})
+"""
+
+
 
 #def DeterminerCount(TweetArray):
 	#generalDeterminers = ["the", "a", "an", "another", "no" , "'s", "my", "our", "their", "her"

@@ -24,14 +24,13 @@ angular.module('routerApp', ['routerRoutes'])
 			contact: 'will.go.code@gmail.com',
 			pic: '/assets/images/will.jpg' },
 		{ name: 'Ada Chen', role: 'Front End Developer', 
-			bio: 'Recently came back from Miami. Continues to watch videos\
-				  on AngularJS. Currently dating Jimmy.',
+			bio: 'New to web development but interested. Loves to play games.',
 			contact: 'ada77.chen@gmail.com',
-			pic: '/assets/images/ada.jpg' },
+			pic: '/assets/images/boo.jpg' },
 		{ name: 'Fabio Francois', role: 'Back End Developer', 
-			bio: 'vim > emacs',
+			bio: 'working on backend or whatever',
 			contact: 'ffrancois749@gmail.com',
-			pic: '/assets/images/david.jpg' },	
+			pic: '/assets/images/fabs.jpg' },	
 		{ name: 'Brandon Troche', role: 'Backend Developer', 
 			bio: 'Brandon is working on half of the backend. In addition to backend,\
 				  he also works well in iOS full stack development and Object \
