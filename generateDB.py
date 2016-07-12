@@ -39,28 +39,30 @@ def print_tweet(tweet):
 
 #change the value in items to choose the number of tweets to retrieve for this request
 def add_tweets(arr, name):
-    for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(1000):
+    for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(10):
         arr.append(tweet)
 
 clinton = []
 add_tweets(clinton,"HillaryClinton")
 
+'''
 bernie = []
 add_tweets(bernie,"BernieSanders")
     
 trump = []
 add_tweets(trump,"realDonaldTrump")
-
+'''
 
 def write_to_file(openfile,arr):
     openfile.write("name,time,tweets\n")
     for tweet in arr:
-        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',10).replace('\n',' ',10) +'\n')
+        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20) +'\n')
 
-hilfile = open("csvs/hillary.csv","wb")
+hilfile = open("hillary.csv","wb")
 write_to_file(hilfile,clinton)
 hilfile.close()
 
+'''
 bernfile = open("csvs/bernie.csv","wb")
 write_to_file(bernfile,bernie)
 bernfile.close()
@@ -69,3 +71,4 @@ trumpfile = open("csvs/donny.csv","wb")
 write_to_file(trumpfile,trump)
 trumpfile.close()
 #    print(word.text)
+'''
