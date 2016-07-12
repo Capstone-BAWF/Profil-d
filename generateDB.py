@@ -58,7 +58,7 @@ def write_to_file(openfile,arr):
     for tweet in arr:
         openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20) +'\n')
 
-hilfile = open("hillary.csv","wb")
+hilfile = open("csvs/hillary.csv","wb")
 write_to_file(hilfile,clinton)
 hilfile.close()
 
