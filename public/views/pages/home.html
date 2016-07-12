@@ -4,28 +4,27 @@
 </div>
 
 <div class="col-md-4 text-center">
-	<button type="button" class="btn btn-info btn-lg"  data-toggle="collapse" data-target="#mode">Select a Mode</button>
-	<div id="mode" class="collapse">
-		<br>
-		<button type="button" class="btn btn-success"> Enter a Tweet</button>
-  	</div>
+	<h4> Select a Mode </h4>
+	<button type="button" class="btn btn-success" data-toggle="collapse" data-target=""> Enter a Tweet </button>
+	<br><br>
+	<button type="button" class="btn btn-success" data-toggle="collapse" data-target=""> Import Your Tweets </button>
+	<br><br>
+	<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mode"> Next </button>
 </div>
 
-<div class="col-md-4 text-center">
-	<button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#candidates">Pick a Candidate</button>
-	<div id="candidates" class="collapse">
-		<br>
-		<button type="button" class="btn btn-success"> Donald Trump</button>
-		<br>
-		<button type="button" class="btn btn-success"> Hilary Clinton</button>
-		<br>
-		<button type="button" class="btn btn-success"> Bernie Sanders</button>
-  	</div>
+<div class="col-md-4 text-center collapse" id="mode">
+	<h4> Pick a Candidate </h4>
+	<button type="button" class="btn btn-success"> Donald Trump</button>
+	<br><br>
+	<button type="button" class="btn btn-success"> Hilary Clinton</button>
+	<br><br>
+	<button type="button" class="btn btn-success"> Bernie Sanders</button>
+	<br><br>
+	<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#results"> Analyze Me </button>
 </div>
 	
-<div class="col-md-4 text-center">
-	<button type="button" class="btn btn-info btn-lg" data-toggle="collapse" data-target="#results">Results</button>
-	<div id="results" class="collapse">
-		yay donald trump is bae
-  	</div>
+<div class="col-md-4 text-center collapse" id="results">
+	<h4> Results </h4>
+	<br><br>
+	<button type="button" class="btn btn-default"> Try Again </button>
 </div>
