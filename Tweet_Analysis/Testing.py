@@ -5,63 +5,116 @@ import csv
 #import tweepy
 #from pymongo import MongoClient 
 
+#class aTweet():
+
+#	def __init__(self, name, number):
+#		self.name = name
+#		self.number = number
+
+#	def getName(self):
+#		return self.name
+
+#	def getNumber(self):
+#		return self.number
+
 def main():
-	Tweet = ""
-	while Tweet == "" or len(Tweet) > 150:
+	
+	"""while Tweet == "" or len(Tweet) > 150:
 		Tweet = raw_input("You should totally enter a tweet brah: ")
 	print(Tweet)
 	if len(Tweet) > 150:
-		print("Sorry that's not a tweet!")
+		print("Sorry that's not a tweet!")"""
 
-	words = {}
+	
 
-	twitters = Tweet.split()
-	tweetSize = len(twitters)
+	#print ("The size of the array is: " + str(tweetSize))
+	#print(twitters)
+	#print (len(Tweet))
 
-	print ("The size of the array is: " + str(tweetSize))
-	print(twitters)
-	print (len(Tweet))
-
-	print ("The number of times each word was used: ")
-	WordAnalysis(words, tweetSize, twitters)
-	print ("The word that appeared the most was: " + WordCount(words))
+	#print ("The number of times each word was used: ")
+	
+	#print ("The word that appeared the most was: " + highestTerm(words))
 
 
-	csvfile = open('bernie.csv', 'r')
+	csvfile = open('hillary_2.csv', 'r')
 
-	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweet"))
+	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
+
+	Tweet = ""
+
+	wordsDictionary = {}
+	wordsArray = []
 
 	for row in reader:
 		#print(', '.join(str(row)))
 		#print(row['name'], row['time'], row['tweet'])
-		Tweet = str("").join(str(row['name']))
-		print Tweet
+		#TweetName = str("").join(str(row['name']))
+		#TweetTime = str("").join(str(row['time']))
+		TweetTweet = str("").join(str(row['tweets']))
 
+		#print TweetName
+		#print TweetTime
+		#print TweetTweet
+
+		Tweet = TweetTweet
+		tweetArray = Tweet.split()
+		tweetSize = len(tweetArray)
+
+
+		WordAnalysis(wordsDictionary, tweetSize, tweetArray)
+
+	for keys in wordsDictionary:
+		wordsArray.append(keys)
+
+	copyDict = wordsDictionary.copy()
+
+	wordsArray = sortArray(wordsArray, copyDict)
+
+
+
+	#print wordsDictionary;
+	#print "The most used word is: " + str(highestTerm(wordsDictionary)) + ", at: " + str(wordsDictionary[highestTerm(wordsDictionary)])
+	print "The number of unique words used was: " + str(len(wordsDictionary))
+	print "The number of unique words in our array is: " + str(len(wordsArray))
+	print wordsArray[0]
+	print wordsArray[149]
+	print wordsDictionary['to']
+	#print wordsDictionary.sorted()
 	csvfile.close()
 
-	print(reader)
+	#print(reader)
 
-	"""for index in twitters:
-	print(index)"""
+	#newTweet = aTweet("myName", 1)
+	#print str(newTweet.getName()) + " : " + str(newTweet.getNumber())
 
 
 
 def WordAnalysis(SemanticDictionary, Size, TweetArray):
 	for i in range(Size):
-		if(SemanticDictionary.has_key(TweetArray[i])):
-			SemanticDictionary[TweetArray[i]] += 1
+		if(SemanticDictionary.has_key(TweetArray[i].lower())):
+			SemanticDictionary[TweetArray[i].lower()] += 1
 		else: 
-			SemanticDictionary[TweetArray[i]] = 1
-	print SemanticDictionary
+			SemanticDictionary[TweetArray[i].lower()] = 1
+	#print SemanticDictionary
 
-def WordCount(SemanticDictionary):
-	tempLargest = 1
+#def checkTerm(Term, SemanticDictionary):
+
+def highestTerm(SemanticDictionary):
+	tempLargest = 0
 	tempString = "All equally used"
 	for i in SemanticDictionary:
 		if SemanticDictionary[i] > tempLargest:
 			tempLargest = SemanticDictionary[i]
 			tempString = i
+	del SemanticDictionary[tempString]
 	return tempString
+
+def sortArray(termArray, SemanticDictionary):
+	sortedArray = []
+	for objs in termArray:
+		sortedArray.insert(0, highestTerm(SemanticDictionary))
+	return sortedArray
+
 
 def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs):
 	tf = termFrequencyInDoc.toDouble / totalTermsInDoc 
@@ -103,8 +156,6 @@ it.map { case(title, contents) =>
       }
 })
 """
-
-
 
 #def DeterminerCount(TweetArray):
 	#generalDeterminers = ["the", "a", "an", "another", "no" , "'s", "my", "our", "their", "her"
