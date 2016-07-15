@@ -5,36 +5,7 @@ import csv
 #import tweepy
 #from pymongo import MongoClient 
 
-#class aTweet():
-
-#	def __init__(self, name, number):
-#		self.name = name
-#		self.number = number
-
-#	def getName(self):
-#		return self.name
-
-#	def getNumber(self):
-#		return self.number
-
 def main():
-	
-	"""while Tweet == "" or len(Tweet) > 150:
-		Tweet = raw_input("You should totally enter a tweet brah: ")
-	print(Tweet)
-	if len(Tweet) > 150:
-		print("Sorry that's not a tweet!")"""
-
-	
-
-	#print ("The size of the array is: " + str(tweetSize))
-	#print(twitters)
-	#print (len(Tweet))
-
-	#print ("The number of times each word was used: ")
-	
-	#print ("The word that appeared the most was: " + highestTerm(words))
-
 
 	csvfile = open('hillary_2.csv', 'r')
 
@@ -78,16 +49,11 @@ def main():
 	print "The number of unique words in our array is: " + str(len(wordsArray))
 	print wordsArray[0]
 	print wordsArray[149]
-	print wordsDictionary['to']
-	#print wordsDictionary.sorted()
+	print checkTerm(wordsArray[149], wordsDictionary)
+
 	csvfile.close()
 
 	#print(reader)
-
-	#newTweet = aTweet("myName", 1)
-	#print str(newTweet.getName()) + " : " + str(newTweet.getNumber())
-
-
 
 def WordAnalysis(SemanticDictionary, Size, TweetArray):
 	for i in range(Size):
@@ -95,9 +61,9 @@ def WordAnalysis(SemanticDictionary, Size, TweetArray):
 			SemanticDictionary[TweetArray[i].lower()] += 1
 		else: 
 			SemanticDictionary[TweetArray[i].lower()] = 1
-	#print SemanticDictionary
 
-#def checkTerm(Term, SemanticDictionary):
+def checkTerm(Term, SemanticDictionary):
+	return SemanticDictionary[Term]
 
 def highestTerm(SemanticDictionary):
 	tempLargest = 0
