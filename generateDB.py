@@ -5,7 +5,8 @@ import tweepy
 from pymongo import MongoClient 
 
 client = MongoClient()
-db = client.test
+db = client.tweetLibrary
+collection = db.Tweets
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -14,12 +15,10 @@ consumer_token = '9VvsBn2c4Q5wBSoA3MsBZLbFp'
 consumer_secret = 'bVPdCJWsjw6Q75UO6FqSPYLJottjbj0Q4kkO46PjyLhlbqp9Il'
 
 auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
-
 api = tweepy.API(auth)
 
 #api.search returns the most recent 15 tweets for the search criteria
 #results = api.search(q="crepes")
-
 '''
 api.user_timeline by default give the 20 most recent tweets of the user
 that registered the api. add a username to search so we dont pull Will's tweets
