@@ -5,9 +5,16 @@ import csv
 #import tweepy
 #from pymongo import MongoClient 
 
+"""
+-	Compute tf-idf using tf and df as separate tweets instead of separate documents
+-	Filter out all the non-important words
+-	Compare two cvs's to each other. Say Hillary to Bernie and try to see how similar they are
+-	Group together all the stemmed words
+"""
+
 def main():
 
-	csvfile = open('hillary_2.csv', 'r')
+	csvfile = open('hillary.csv', 'r')
 
 	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
 
@@ -47,9 +54,18 @@ def main():
 	#print "The most used word is: " + str(highestTerm(wordsDictionary)) + ", at: " + str(wordsDictionary[highestTerm(wordsDictionary)])
 	print "The number of unique words used was: " + str(len(wordsDictionary))
 	print "The number of unique words in our array is: " + str(len(wordsArray))
+
 	print wordsArray[0]
 	print wordsArray[149]
 	print checkTerm(wordsArray[149], wordsDictionary)
+
+	print "The 20 most used words were: "
+	mostUsed(20, wordsArray, wordsDictionary)
+	print "After filtering the 20 most used words were: "
+	#print len(wordsArray)
+	stopWordsFilter(wordsArray)
+	#print len(wordsArray)
+	mostUsed(20, wordsArray, wordsDictionary)
 
 	csvfile.close()
 
@@ -61,6 +77,10 @@ def WordAnalysis(SemanticDictionary, Size, TweetArray):
 			SemanticDictionary[TweetArray[i].lower()] += 1
 		else: 
 			SemanticDictionary[TweetArray[i].lower()] = 1
+
+def mostUsed(numberOfMostUsed, termArray, SemanticDictionary):
+	for terms in range(numberOfMostUsed):
+		print "The term '%s' appeared '%s' times." % (termArray[len(termArray) - terms - 1], checkTerm(termArray[len(termArray) - terms - 1], SemanticDictionary))
 
 def checkTerm(Term, SemanticDictionary):
 	return SemanticDictionary[Term]
@@ -87,6 +107,22 @@ def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDo
 	docFreq = totalDocs.toDouble / termFreqInCorpus 
 	idf = math.log(docFreq)
 	return tf*idf
+
+def stopWordsFilter(termArray):
+	stopWordList = "a about above after again against all am an and any are aren't as at be because been before being below between both but by can't cannot could couldn't did didn't do does doesn't doing don't down during each few for from further had hadn't has hasn't have haven't having he he'd he'll he's her here here's hers herself him himself his how how's i i'd i'll i'm i've if in into is isn't it it's its itself let's me more most mustn't my myself no nor not of off on once only or other ought our ours ourselves out over own same shan't she she'd she'll she's should shouldn't so some such than that that's the their theirs them themselves then there there's these they they'd they'll they're they've this those through to too under until up very was wasn't we we'd we'll we're we've were weren't what what's when when's where where's which while who who's whom why why's with won't would wouldn't you you'd you'll you're you've your yours yourself yourselves"
+	stopWords = []
+	stopWords = stopWordList.split()
+	toRemove = []
+	#print(len(stopWords))
+	for term in termArray:
+		for wordz in stopWords:
+			if(term == wordz):
+				#print term 
+				#print wordz
+				toRemove.append(term)
+
+	for objects in toRemove:
+		termArray.remove(objects)
 
 """  
 import edu.stanford.nlp.pipeline._
