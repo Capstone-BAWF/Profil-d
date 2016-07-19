@@ -60,6 +60,7 @@ def main():
 
 	print "The 20 most used words were: "
 	mostUsed(20, wordsArray, wordsDictionary)
+	print "\n"
 	print "After filtering the 20 most used words were: "
 	#print len(wordsArray)
 	stopWordsFilter(wordsArray)
