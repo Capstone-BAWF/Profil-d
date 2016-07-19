@@ -1,5 +1,5 @@
 module.exports = {
 	'port': process.env.PORT || 8080,
-	'database': 'mongodb://localhost:27017/newDb',
+	'database': 'mongodb://william:lemons@ds023475.mlab.com:23475/profild',
 	'secret': 'capstoneisthebest'
 };
