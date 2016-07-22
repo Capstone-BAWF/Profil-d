@@ -1,12 +1,12 @@
 #import os
 import sys
 import csv
+from math import log
 #import time
 #import tweepy
 #from pymongo import MongoClient 
 
 """
--	Compute tf-idf using tf and df as separate tweets instead of separate documents
 -	Compare two cvs's to each other. Say Hillary to Bernie and try to see how similar they are
 -	Group together all the stemmed words
 """
@@ -40,6 +40,8 @@ def main():
 
 		WordAnalysis(wordsDictionary, tweetSize, tweetArray)
 
+	csvfile.close()
+
 	for keys in wordsDictionary:
 		wordsArray.append(keys)
 
@@ -51,7 +53,7 @@ def main():
 
 	#print wordsDictionary;
 	#print "The most used word is: " + str(highestTerm(wordsDictionary)) + ", at: " + str(wordsDictionary[highestTerm(wordsDictionary)])
-	print "The number of unique words used was: " + str(len(wordsDictionary))
+	"""print "The number of unique words used was: " + str(len(wordsDictionary))
 	print "The number of unique words in our array is: " + str(len(wordsArray))
 
 	print wordsArray[0]
@@ -62,12 +64,22 @@ def main():
 	mostUsed(20, wordsArray, wordsDictionary)
 	print "\n"
 	print "After filtering the 20 most used words were: "
-	#print len(wordsArray)
+	#print len(wordsArray) """
 	stopWordsFilter(wordsArray)
 	#print len(wordsArray)
-	mostUsed(20, wordsArray, wordsDictionary)
+	#mostUsed(20, wordsArray, wordsDictionary)
+	
 
-	csvfile.close()
+	#print termDocWeight(checkTerm(wordsArray[4929], wordsDictionary), len(wordsArray), checkTerm(wordsArray[4929], wordsDictionary),969)
+
+	for words in wordsArray:
+		print termDocWeight(checkTerm(words, wordsDictionary), len(wordsArray), checkTerm(words, wordsDictionary), 969)
+
+	mostUsed(100, wordsArray, wordsDictionary)
+
+	#print checkTerm("bernie", wordsDictionary)
+
+	
 
 	#print(reader)
 
@@ -103,9 +115,13 @@ def sortArray(termArray, SemanticDictionary):
 
 
 def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs):
-	tf = termFrequencyInDoc.toDouble / totalTermsInDoc 
-	docFreq = totalDocs.toDouble / termFreqInCorpus 
-	idf = math.log(docFreq)
+	#print termFrequencyInDoc
+	#print totalTermsInDoc
+	tf = float(termFrequencyInDoc) / float(totalTermsInDoc) 
+	#print tf
+	docFreq = totalDocs / termFreqInCorpus 
+	idf = log(docFreq)
+	#print idf
 	return tf*idf
 
 def stopWordsFilter(termArray):
