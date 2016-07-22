@@ -47,7 +47,7 @@ add_tweets(clinton,"HillaryClinton")
 '''
 bernie = []
 add_tweets(bernie,"BernieSanders")
-    
+
 trump = []
 add_tweets(trump,"realDonaldTrump")
 '''
@@ -55,9 +55,9 @@ add_tweets(trump,"realDonaldTrump")
 def write_to_file(openfile,arr):
     openfile.write("name,time,tweets\n")
     for tweet in arr:
-        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20) +'\n')
+        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20).replace('.','',20) +'\n')
 
-hilfile = open("csvs/hillary.csv","wb")
+hilfile = open("hillary.csv","wb")
 write_to_file(hilfile,clinton)
 hilfile.close()
 
@@ -65,7 +65,7 @@ hilfile.close()
 bernfile = open("csvs/bernie.csv","wb")
 write_to_file(bernfile,bernie)
 bernfile.close()
-    
+
 trumpfile = open("csvs/donny.csv","wb")
 write_to_file(trumpfile,trump)
 trumpfile.close()

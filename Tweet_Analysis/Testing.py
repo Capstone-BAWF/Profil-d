@@ -1,19 +1,19 @@
 #import os
 import sys
 import csv
+from math import log
 #import time
 #import tweepy
-#from pymongo import MongoClient 
+from pymongo import MongoClient 
 
 """
--	Compute tf-idf using tf and df as separate tweets instead of separate documents
 -	Compare two cvs's to each other. Say Hillary to Bernie and try to see how similar they are
 -	Group together all the stemmed words
 """
 
 def main():
 
-	csvfile = open('hillary.csv', 'r')
+	csvfile = open('donny.csv', 'r')
 
 	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
 
@@ -40,6 +40,8 @@ def main():
 
 		WordAnalysis(wordsDictionary, tweetSize, tweetArray)
 
+	csvfile.close()
+
 	for keys in wordsDictionary:
 		wordsArray.append(keys)
 
@@ -51,7 +53,7 @@ def main():
 
 	#print wordsDictionary;
 	#print "The most used word is: " + str(highestTerm(wordsDictionary)) + ", at: " + str(wordsDictionary[highestTerm(wordsDictionary)])
-	print "The number of unique words used was: " + str(len(wordsDictionary))
+	"""print "The number of unique words used was: " + str(len(wordsDictionary))
 	print "The number of unique words in our array is: " + str(len(wordsArray))
 
 	print wordsArray[0]
@@ -62,12 +64,22 @@ def main():
 	mostUsed(20, wordsArray, wordsDictionary)
 	print "\n"
 	print "After filtering the 20 most used words were: "
-	#print len(wordsArray)
+	#print len(wordsArray) """
 	stopWordsFilter(wordsArray)
 	#print len(wordsArray)
-	mostUsed(20, wordsArray, wordsDictionary)
+	#mostUsed(20, wordsArray, wordsDictionary)
+	
 
-	csvfile.close()
+	#print termDocWeight(checkTerm(wordsArray[4929], wordsDictionary), len(wordsArray), checkTerm(wordsArray[4929], wordsDictionary),969)
+
+	for words in wordsArray:
+		print termDocWeight(checkTerm(words, wordsDictionary), len(wordsArray), checkTerm(words, wordsDictionary), 969)
+
+	mostUsed(100, wordsArray, wordsDictionary)
+
+	#print checkTerm("wall", wordsDictionary)
+
+	
 
 	#print(reader)
 
@@ -103,13 +115,29 @@ def sortArray(termArray, SemanticDictionary):
 
 
 def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs):
-	tf = termFrequencyInDoc.toDouble / totalTermsInDoc 
-	docFreq = totalDocs.toDouble / termFreqInCorpus 
-	idf = math.log(docFreq)
+	#print termFrequencyInDoc
+	#print totalTermsInDoc
+	tf = float(termFrequencyInDoc) / float(totalTermsInDoc) 
+	#print tf
+	docFreq = totalDocs / termFreqInCorpus 
+	idf = log(docFreq)
+	#print idf
 	return tf*idf
 
 def stopWordsFilter(termArray):
-	stopWordList = "a about above after again against all am an and any are aren't as at be because been before being below between both but by can't cannot could couldn't did didn't do does doesn't doing don't down during each few for from further had hadn't has hasn't have haven't having he he'd he'll he's her here here's hers herself him himself his how how's i i'd i'll i'm i've if in into is isn't it it's its itself let's me more most mustn't my myself no nor not of off on once only or other ought our ours ourselves out over own same shan't she she'd she'll she's should shouldn't so some such than that that's the their theirs them themselves then there there's these they they'd they'll they're they've this those through to too under until up very was wasn't we we'd we'll we're we've were weren't what what's when when's where where's which while who who's whom why why's with won't would wouldn't you you'd you'll you're you've your yours yourself yourselves just can"
+	stopWordList = "a about above after again against all am an and any are \
+	aren't as at be because been before being below between both but by can't \
+	cannot could couldn't did didn't do does doesn't doing don't down during each \
+	few for from further had hadn't has hasn't have haven't having he he'd he'll he's\
+	 her here here's hers herself him himself his how how's i i'd i'll i'm i've if in \
+	 into is isn't it it's its itself let's me more most mustn't my myself no nor not of \
+	 off on once only or other ought our ours ourselves out over own same shan't she she'd \
+	 she'll she's should shouldn't so some such than that that's the their theirs them \
+	 themselves then there there's these they they'd they'll they're they've this those \
+	 through to too under until up very was wasn't we we'd we'll we're we've were weren't \
+	 what what's when when's where where's which while who who's whom why why's with won't \
+	 would wouldn't you you'd you'll you're you've your yours yourself yourselves just can"
+
 	stopWords = []
 	stopWords = stopWordList.split()
 	toRemove = []
