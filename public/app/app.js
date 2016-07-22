@@ -1,24 +1,22 @@
-var profild = angular.module('profild', ['ngAnimate', 'routerRoutes'])
+angular.module('profild', ['ngAnimate', 'routerRoutes'])
 
-profild.controller('mainController', function() {
+.controller('mainController', function() {
 		var vm = this;
 })
 
-profild.controller('loginController', function() {
+.controller('loginController', function() {
 		var vm = this;
 })
 
-profild.controller('homeController', function(User) {
+.controller('homeController', function() {
 		var vm = this;
-
-		vm.titles = [
-			{ name: 'Select a mode', function: 'Next' },
-			{ name: 'Pick a candidate', function: 'View results' },
-			{ name: 'Results', function: 'Try again' }
-		];
+		vm.twitterName = "";
+		vm.option = "";
+		vm.candidate = "";
+		vm.tweet = "";
 })
 
-profild.controller('aboutController', function() {
+.controller('aboutController', function() {
     var vm = this;
 
     vm.members = [
