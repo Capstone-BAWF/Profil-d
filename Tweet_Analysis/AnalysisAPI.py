@@ -6,11 +6,23 @@ from math import log
 #import tweepy
 from pymongo import MongoClient 
 
+__author__ = "Brandon Troche"
+__copyright__ = "Copyright 2016, Profil-d"
+__credits__ = ["Brandon Troche", "William Wu", 
+               "Ada Chen", "Fabio Francios", "Felix Grezes"]
+__maintainer__ = "Brandon Troche"
+__email__ = "bttroche@gmail.com"
+
+#client = MongoClient('mongodb://local_host')
+
 """
 -	Compare two cvs's to each other. Say Hillary to Bernie and try to see how similar they are
 -	Group together all the stemmed words
+-	Overall percentage for comparisons
+-	Show buzz words/topics that you share with a candidate
 """
 
+"""
 def main():
 
 	csvfile = open('donny.csv', 'r')
@@ -53,7 +65,7 @@ def main():
 
 	#print wordsDictionary;
 	#print "The most used word is: " + str(highestTerm(wordsDictionary)) + ", at: " + str(wordsDictionary[highestTerm(wordsDictionary)])
-	"""print "The number of unique words used was: " + str(len(wordsDictionary))
+	print "The number of unique words used was: " + str(len(wordsDictionary))
 	print "The number of unique words in our array is: " + str(len(wordsArray))
 
 	print wordsArray[0]
@@ -64,7 +76,7 @@ def main():
 	mostUsed(20, wordsArray, wordsDictionary)
 	print "\n"
 	print "After filtering the 20 most used words were: "
-	#print len(wordsArray) """
+	#print len(wordsArray) 
 	stopWordsFilter(wordsArray)
 	#print len(wordsArray)
 	#mostUsed(20, wordsArray, wordsDictionary)
@@ -82,6 +94,7 @@ def main():
 	
 
 	#print(reader)
+"""
 
 def WordAnalysis(SemanticDictionary, Size, TweetArray):
 	for i in range(Size):
@@ -156,5 +169,5 @@ def stemming(termArray):
 	return 0
 
 
-main()
+#main()
 
