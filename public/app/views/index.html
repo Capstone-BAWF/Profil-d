@@ -9,10 +9,10 @@
 	<!-- Loading CSS libraires -->
 	<link rel="stylesheet" href="assets/libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/libs/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/libs/css/animations.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 	
 	<style>
-        body { padding-top:50px; }
+        body { background-color: black;}
 	</style>
 
 	<!-- Loading JavaScript libraries -->
@@ -22,35 +22,29 @@
 	<script src="assets/libs/jquery/dist/jquery.min.js"></script>
 	<script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
-	<!-- Loading Controllers-->
-	<script src="app/controllers/mainController.js"></script>
-	<script src="app/controllers/homeController.js"></script>
-	<script src="app/controllers/aboutController.js"></script>
-	
-
 	<!-- Loading main Angular files -->
 	<script src="app/app.routes.js"></script>
 	<script src="app/app.js"></script> 
     
 </head>
 
-<body background="http://puu.sh/qcqce/75c6317f6e.png" class="container slideDown" ng-app="profild" ng-controller="mainController as main">
-	<header>
-		<nav class="navbar navbar-inverse">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Profil'd</a>
-			</div>
-
-			<ul class="nav navbar-nav navbar-right" style="padding-right:17px">
-				<li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-				<li><a href="/about"><i class="fa fa-shield"></i> About</a></li>
-				<li><a href="/login"><i class="fa fa-sign-out"></i> Logout </a></li> 
-			</ul>
+<body ng-app="profild">
+	<header class="text-center">
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: black; padding-bottom:10px; height: 100px; box-shadow: 0px 5px 5px #1a1a1a">
+			<a href="/" class="header-home">home</a>
+			<a href="/"><img src="assets/images/logo.png" style="width: 250px; height:auto; padding-top: 12px;"></a>
+			<a href="/about" class="header-about">about</a>
 		</nav>
 	</header>
 
-	<main class="container">
-		<div ng-view> </div>
+	<footer class="text-center">
+		<nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: black">	
+			<p style="padding-top:10px"> &copy 2016 Profil'd</p>
+		</nav>
+	</footer>
+	
+	<main style="padding-top:20px">
+		<div class="page {{ pageClass }}" style="background-size: cover; background-repeat: no-repeat" ng-view> </div>
 	</main>
 
 </body>

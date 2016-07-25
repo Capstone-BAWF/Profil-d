@@ -1,0 +1,26 @@
+<style>
+    h2{color:white;}
+    label{color:white;}
+    p{color:white;}
+</style>
+
+<div class="jumbotron text-center" style="background-color: transparent">
+    <h1 style="color:white"> Pick a Candidate! </h1>
+    <h2> Choose your favorite! </h2>
+</div>
+
+<div class="col-md-4 col-md-offset-4">
+    <form novalidate class="simple-form" action="/result">
+		<div class="form-group">
+            <select class="form-control fancy-field" ng-model="home.candidate">
+                <option> Donald Trump </option>
+                <option> Hillary Clinton </option>
+                <option> Bernie Sanders </option>
+            </select>
+        </div>
+		<br>
+		<div class="form-group text-center">
+            <button type="submit" class="btn btn-default fancy-button"> Next </button>
+        </div>
+	</form>
+</div>

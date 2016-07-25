@@ -1,73 +1,21 @@
-<div class="jumbotron text-center" style="background:transparent">
-	<h1 style="color:white"> Welcome! </h1>
-	<h2 style="color:white"> Pick an option to start! </h2>
+<style>
+	h2{color:white;}
+	label{color:white;}
+	p{color:white;}
+</style>
+
+<div class="jumbotron text-center" style="background-color: transparent">
+	<h1 style="color:white">Welcome! </h1>
+	<h2> Enter your Twitter handle to start! </h2>
 </div>
-<!--
-<div class="col-md-4 text-center">
-	<h4> Select a Mode </h4>
-	<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#submit"> Enter a Tweet </button>
-	<br><br>
-	<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#submittweet"> Import Your Tweets </button>
-	<br><br>
-	<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#mode"> Next </button>
-</div>
-
-<div class="col-md-4 text-center collapse" id="mode">
-	<h4> Pick a Candidate </h4>
-	<button type="button" class="btn btn-success"> Donald Trump</button>
-	<br><br>
-	<button type="button" class="btn btn-success"> Hilary Clinton</button>
-	<br><br>
-	<button type="button" class="btn btn-success"> Bernie Sanders</button>
-	<br><br>
-	<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#results"> Analyze Me </button>
-</div>
-	
-<div class="col-md-4 text-center collapse" id="results">
-	<h4> Results </h4>
-	<br><br>
-	<button type="button" class="btn btn-default"> Try Again </button>
-</div>-->
-
-<div class="col-md-4 col-md-offset-4" text-center">
-	<form novalidate class="simple-form">
-		<div class="form-group" style="color:white">
-			<label for="twitterName"> Twitter Username </label>
-			<input type="text" class="form-control" id="twitterName" placeholder="@fabioxxx" ng-model="home.twitterName">
+<div class="col-md-4 col-md-offset-4">
+	<form novalidate action="/candidate" class="simple-form">
+		<div class="form-group">
+			<input type="text" class="text-center form-control fancy-field" id="twitterName" placeholder="@fabioxxx" ng-model="home.twitterName">
 		</div>
-
-		<div class="radio form-group text-center" style="color:white">
-			<label>
-				<input type="radio" name="modePick" id="mode1" value="pickCandidate" checked ng-model="home.option">
-					Choose a Candidate
-				</input>
-			</label>
-		</div>
-
-		<div class="radio form-group text-center" style="color:white">
-			<label>
-				<input type="radio" name="modePick" id="mode2" value="enterTweet" ng-model="home.option">
-					Enter a Tweet
-				</input>
-			</label>
-		</div>
-
-		<div class="form-group" style="color:white">
-			<label for="inputTweet"> Input a Tweet </label>
-			<input type="text" class="form-control" placeholder="I love America!" ng-model="home.tweet">
-		</div>
-		
-		<div class="form-group" style="color:white">
-			<label for="chooseCandidate"> Choose a Candidate </label>
-			<select class="form-control" ng-model="home.candidate">
-				<option> Donald Trump </option>
-				<option> Hillary Clinton </option>
-				<option> Bernie Sanders </option>
-			</select>
-		</div>
-		
+		<br>
 		<div class="form-group text-center">
-			<button type="submit" class="btn btn-default"> Analyze! </button>
+			<button type="submit" class="btn btn-default fancy-button"> Next </button>
 		</div>
 	</form>
 </div>

@@ -1,25 +1,28 @@
-angular.module('profild', ['ngAnimate', 'routerRoutes'])
+var profild = angular.module('profild', ['ngAnimate', 'routerRoutes'])
 
-.controller('mainController', function() {
-		var vm = this;
-})
+// CONTROLLERS
+profild.controller('mainController', function($scope) {
+		$scope.pageClass = 'page-main';
+});
 
-.controller('loginController', function() {
-		var vm = this;
-})
+profild.controller('homeController', function($scope) {
+		$scope.pageClass = 'page-home';
+		$scope.twitterName = "";
+});
 
-.controller('homeController', function() {
-		var vm = this;
-		vm.twitterName = "";
-		vm.option = "";
-		vm.candidate = "";
-		vm.tweet = "";
-})
+profild.controller('candidateController', function($scope) {
+		$scope.pageClass = 'page-candidate';
+		$scope.candidate = "";
+});
 
-.controller('aboutController', function() {
-    var vm = this;
+profild.controller('resultController', function($scope) {
+		$scope.pageClass = 'page-result';
+		$scope.result = "";	
+});
 
-    vm.members = [
+profild.controller('aboutController', function($scope) {
+	$scope.pageClass = 'page-about';
+	$scope.members = [
         { name: 'William Wu', role: 'Full Stack Developer',
             bio: 'Interested in mobile development and experienced in full stack\
                   development and data science technology.',
@@ -41,3 +44,5 @@ angular.module('profild', ['ngAnimate', 'routerRoutes'])
             pic: '/assets/images/brandon.jpg' }
     ];
 });
+
+// 
