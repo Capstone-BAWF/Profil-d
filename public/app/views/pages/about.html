@@ -1,10 +1,18 @@
+<style>
+	h2{color: white;}
+	h4{color: white;}
+	h5{color: white;}
+	h6{color: white;}
+	p{color: white;}
+</style>
+
 <div class="jumbotron text-center" style="background:transparent">
-	<h1> About Us </h1>
+	<h1 style="color: white"> About Us </h1>
 
 	<h2> Here's a little about us! </h2>
 </div>
 
-<div class="col-md-3 text-center" ng-repeat="member in about.members">
+<div class="col-md-3 text-center" ng-repeat="member in members">
 	<h4> {{ member.name }} </h4>
 	<h5> {{ member.role }} </h5>
 	<h6> {{ member.contact }} </h6>

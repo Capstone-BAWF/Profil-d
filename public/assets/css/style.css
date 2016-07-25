@@ -1,0 +1,12 @@
+.page        {
+    bottom:0; 
+    padding-top:200px;
+    position:absolute; 
+    text-align:center;
+    top:0;  
+    width:100%; 
+}
+
+.page-home      { background-image: url("home.jpg")}
+
+.page-about     { background-image: url("about.jpg"); } 
