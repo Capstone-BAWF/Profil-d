@@ -1,3 +1,5 @@
+/* PAGES */
+
 .page        {
     bottom:0; 
     padding-top:200px;
@@ -32,3 +34,58 @@
 	color:white;
 	background-color: transparent;
 }
+
+
+/* ANIMATIONS */
+
+@keyframes slideDown {
+	from { transform: translateZ(100%); }
+	to   { transform: translateZ(0);}
+}
+
+@keyframes slideInRight {
+    from    { transform:translateX(100%); }
+    to      { transform: translateX(0); }
+}
+
+@keyframes slideOutLeft {
+    to      { transform: translateX(-100%); }
+}
+
+.slideDown{
+    animation-name: slideDown;
+    -webkit-animation-name: slideDown;
+
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+    visibility: visible !important;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); }
+	to   { transform: translateY(0%); }
+}
+
+@-webkit-keyframes slideDown {
+    from { -webkit-transform: translateY(-100%); }
+	to   { -webkit-transform: translateY(0%); }
+}
+
+.ng-enter { z-index: 8888; }
+.ng-leave { z-index: 9999; }
+
+.page-home.ng-enter { animation: slideDown 0.5s both ease-in; }
+.page-home.ng-leave { animation: slideOutLeft both ease-in; }
+
+.page-candidate.ng-enter { animation: slideInRight 0.5s both ease-in; }
+.page-candidate.ng-leave { animation: slideOutLeft both ease-in; }
+
+.page-result.ng-enter { animation: slideInRight 0.5s both ease-in; }
+.page-result.ng-leave { animation: slideOutLeft both ease-in; }
+
+.page-about.ng-enter { animation: slideDown 0.5s both ease-in; }
+.page-about.ng-leave { animation: slideOutLeft both ease-in; }
