@@ -2,15 +2,22 @@ var profild = angular.module('profild', ['ngAnimate', 'routerRoutes'])
 
 // CONTROLLERS
 profild.controller('mainController', function($scope) {
-		$scope.pageClass= 'page-main';
+		$scope.pageClass = 'page-main';
 });
 
 profild.controller('homeController', function($scope) {
-		$scope.pageClass= 'page-home';
+		$scope.pageClass = 'page-home';
 		$scope.twitterName = "";
-		$scope.option = "";
+});
+
+profild.controller('candidateController', function($scope) {
+		$scope.pageClass = 'page-candidate';
 		$scope.candidate = "";
-		$scope.tweet = "";
+});
+
+profild.controller('resultController', function($scope) {
+		$scope.pageClass = 'page-result';
+		$scope.result = "";	
 });
 
 profild.controller('aboutController', function($scope) {

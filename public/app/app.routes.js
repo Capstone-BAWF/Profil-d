@@ -8,22 +8,24 @@ angular.module('routerRoutes', ['ngRoute'])
         // route for the home page
         .when('/', {
 				templateUrl : 'app/views/pages/home.html',
-				controller  : 'homeController',
-				controllerAs: 'home'
+				controller  : 'homeController'
         })
 
         // route for the about page
         .when('/about', {
 				templateUrl : 'app/views/pages/about.html',
-				controller  : 'aboutController',
-				controllerAs: 'about'
+				controller  : 'aboutController'
         })
 
-		.when('/login', {
-				templateUrl : 'app/views/pages/login.html',
-				controller  : 'loginController',
-				controllerAs: 'login'
+		.when('/candidate', {
+				templateUrl : 'app/views/pages/candidate.html',
+				controller  : 'candidateController'
 		})
+
+		.when('/result', {
+				templateUrl : 'app/views/pages/result.html',
+				controller  : 'resultController'
+		});
     
 	$locationProvider.html5Mode(true);
 });
