@@ -1,4 +1,7 @@
+import csv
+import json
 import os
+import pandas as pd
 import sys
 import time
 import tweepy
@@ -25,16 +28,18 @@ that registered the api. add a username to search so we dont pull Will's tweets
 '''
 #results = api.user_timeline(screen_name="realDonaldTrump")
 
-#this would print out 15 if using default search function
-#print len(results)
-
 #this prints out the handle, username, and post date of the tweet selected
 def print_tweet(tweet):
     print "@%s - %s (%s)" % (tweet.user.screen_name, tweet.user.name, tweet.created_at)
     print tweet.text
 
-#tweet=results[1]
-#print_tweet(tweet)
+user_tweets = []
+
+#lesvivants
+def get_user_tweets(arr):
+    username = str(sys.argv[1])
+    for tweet in tweepy.Cursor(api.user_timeline, screen_name=username).items(10):
+        arr.append(tweet)
 
 #change the value in items to choose the number of tweets to retrieve for this request
 def add_tweets(arr, name):
@@ -51,15 +56,22 @@ add_tweets(bernie,"BernieSanders")
 trump = []
 add_tweets(trump,"realDonaldTrump")
 '''
-
+    
 def write_to_file(openfile,arr):
     openfile.write("name,time,tweets\n")
     for tweet in arr:
-        openfile.write(tweet.user.name + ',' + str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20).replace('.','',20) +'\n')
+        openfile.write(tweet.user.name + ',' + \
+        str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20).replace('.','',20).replace('-',' ',20) +'\n')
 
 hilfile = open("hillary.csv","wb")
 write_to_file(hilfile,clinton)
 hilfile.close()
+hilfile = open("hillary.csv", "r")
+
+data = pd.read_csv(hilfile, quoting=csv.QUOTE_NONE)
+data_json = json.loads(data.to_json(orient = 'records'))
+collection.remove()
+collection.insert(data_json)
 
 '''
 bernfile = open("csvs/bernie.csv","wb")
