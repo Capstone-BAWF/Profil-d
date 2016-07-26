@@ -4,19 +4,52 @@ from math import log
 from pymongo import MongoClient 
 import AnalysisAPI
 
+
+#client = MongoClient('mongodb://local_host')
+
+
+
 def Main():
 
-	myDictionary = {}
-	myArray = []
+	hillaryDictionary = {}
+	hillaryArray = []
 
-	#AnalysisAPI.WordAnalysis(myDictionary, len(myArray), myArray)
+	print " HILLARY: "
 
-	myDictionary = AnalysisAPI.parseCSV("hillary.csv")
+	#commandLine = str(sys.argv[1])
 
-	myArray = AnalysisAPI.createArray(myDictionary)
+	hillaryDictionary = AnalysisAPI.parseCSV("hillary.csv")
 
-	#print myDictionary
-	print myArray
+	hillaryArray = AnalysisAPI.createArray(hillaryDictionary)
+
+	AnalysisAPI.mostUsed(20, hillaryArray, hillaryDictionary)
+
+	
+	print "_______________________________________________________"
+	print " BERNIE: "
+
+	bernieDictionary = {}
+	bernieArray = []
+
+	bernieDictionary = AnalysisAPI.parseCSV("bernie.csv")
+
+	bernieArray = AnalysisAPI.createArray(bernieDictionary)
+
+	AnalysisAPI.mostUsed(20, bernieArray, bernieDictionary)
+
+	
+	print "_______________________________________________________"
+	print " DONALD DUCK: "
+
+	donnyDictionary = {}
+	donnyArray = []
+
+	donnyDictionary = AnalysisAPI.parseCSV("donny.csv")
+
+	donnyArray = AnalysisAPI.createArray(donnyDictionary)
+
+	AnalysisAPI.mostUsed(20, donnyArray, donnyDictionary)
+
 
 
 Main()
