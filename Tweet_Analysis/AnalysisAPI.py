@@ -25,14 +25,14 @@ __email__ = "bttroche@gmail.com"
 """
 def main():
 
-	csvfile = open('donny.csv', 'r')
+	#csvfile = open('donny.csv', 'r')
 
-	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
+	#reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
 
-	Tweet = ""
+	#Tweet = ""
 
-	wordsDictionary = {}
-	wordsArray = []
+	#wordsDictionary = {}
+	#wordsArray = []
 
 	for row in reader:
 		#print(', '.join(str(row)))
@@ -49,10 +49,9 @@ def main():
 		tweetArray = Tweet.split()
 		tweetSize = len(tweetArray)
 
-
 		WordAnalysis(wordsDictionary, tweetSize, tweetArray)
 
-	csvfile.close()
+	#csvfile.close()
 
 	for keys in wordsDictionary:
 		wordsArray.append(keys)
@@ -95,6 +94,53 @@ def main():
 
 	#print(reader)
 """
+
+def parseCSV(nameOfCSV):
+	csvfile = open(nameOfCSV, 'r')
+	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
+
+	Tweet = ""
+	wordsDictionary = {}
+
+	for row in reader:
+		#print(', '.join(str(row)))
+		#print(row['name'], row['time'], row['tweet'])
+		#TweetName = str("").join(str(row['name']))
+		#TweetTime = str("").join(str(row['time']))
+		TweetTweet = str("").join(str(row['tweets']))
+
+		#print TweetName
+		#print TweetTime
+		#print TweetTweet
+
+		Tweet = TweetTweet
+		tweetArray = Tweet.split()
+		tweetSize = len(tweetArray)
+
+
+		WordAnalysis(wordsDictionary, tweetSize, tweetArray)
+
+	csvfile.close()
+
+	#print wordsDictionary
+	return wordsDictionary
+
+def createArray(SemanticDictionary):
+	wordsArray = []
+
+	for keys in SemanticDictionary:
+		wordsArray.append(keys)
+
+	copyDict = SemanticDictionary.copy()
+
+	wordsArray = sortArray(wordsArray, copyDict)
+
+	stopWordsFilter(wordsArray)
+
+
+	return wordsArray
+
+
 
 def WordAnalysis(SemanticDictionary, Size, TweetArray):
 	for i in range(Size):

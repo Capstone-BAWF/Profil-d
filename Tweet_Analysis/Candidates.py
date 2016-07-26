@@ -7,12 +7,16 @@ import AnalysisAPI
 def Main():
 
 	myDictionary = {}
-	myArray = ["This", "That", "This", "My", "Something"]
+	myArray = []
 
-	AnalysisAPI.WordAnalysis(myDictionary, len(myArray), myArray)
+	#AnalysisAPI.WordAnalysis(myDictionary, len(myArray), myArray)
 
-	print myDictionary
+	myDictionary = AnalysisAPI.parseCSV("hillary.csv")
 
+	myArray = AnalysisAPI.createArray(myDictionary)
+
+	#print myDictionary
+	print myArray
 
 
 Main()
