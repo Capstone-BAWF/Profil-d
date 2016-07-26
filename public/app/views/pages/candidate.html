@@ -2,6 +2,7 @@
     h2{color:white;}
     label{color:white;}
     p{color:white;}
+    option{color:black;}
 </style>
 
 <div class="jumbotron text-center" style="background-color: transparent">
@@ -13,6 +14,7 @@
     <form novalidate class="simple-form" action="/result">
 		<div class="form-group">
             <select class="form-control fancy-field" ng-model="home.candidate">
+                <option value="" disabled selected> Select your candidate</option>
                 <option> Donald Trump </option>
                 <option> Hillary Clinton </option>
                 <option> Bernie Sanders </option>
