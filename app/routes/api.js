@@ -1,6 +1,7 @@
 var PythonShell = require('python-shell');
 var bodyParser = require('body-parser');
 var User       = require('../models/user');
+var Tweets	   = require('../models/tweet');
 var jwt        = require('jsonwebtoken');
 var config     = require('../../config');
 
@@ -15,6 +16,15 @@ module.exports = function(app, express) {
 				if (err) throw err;
 			});
 			res.json({ message: "I'm a jew!" });
+	});
+
+	apiRouter.get('/test', function(res, res) {
+			Tweets.find(function(err, tweets) {
+				if (err)
+					res.send(err)
+			
+				res.json(config.database);
+			});
 	});
 
 	return apiRouter;
