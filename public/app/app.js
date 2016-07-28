@@ -5,9 +5,15 @@ profild.controller('mainController', function($scope) {
 		$scope.pageClass = 'page-main';
 });
 
-profild.controller('homeController', function($scope) {
+profild.controller('homeController', function($scope, $http, $rootScope, $location) {
 		$scope.pageClass = 'page-home';
 		$scope.twitterName = "";
+
+		$scope.submit = function(){
+			$http.post("/api/userGen/" + $scope.twitterName).success(function(twitterName, err) {
+				console.log('Data sent');
+			})
+		};
 });
 
 profild.controller('candidateController', function($scope) {
