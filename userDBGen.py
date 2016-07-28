@@ -12,8 +12,11 @@ if(len(sys.argv) > 1):
 
 #get_user_tweets(user_tweets)
 
-userfile = open("csvs/user.csv","r+")
+userfile = open("csvs/user.csv","wb")
 write_to_file(userfile,user_tweets)
+userfile.close()
+
+userfile = open("csvs/user.csv","r+")
 
 data = pd.read_csv(userfile, quoting=csv.QUOTE_NONE)
 data_json = json.loads(data.to_json(orient = 'records'))

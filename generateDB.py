@@ -64,16 +64,23 @@ def write_to_file(openfile,arr):
         openfile.write(tweet.user.name + ',' + \
         str(tweet.created_at) + ',' + tweet.text.replace(',',' ',20).replace('\n',' ',20).replace('.',' ',20).replace('-',' ',20) +'\n')
 
-hilfile = open("csvs/hillary.csv","r+")
+hilfile = open("csvs/hillary.csv","wb")
 write_to_file(hilfile,clinton)
+hilfile.close()
 
-bernfile = open("csvs/bernie.csv","r+")
+bernfile = open("csvs/bernie.csv","wb")
 write_to_file(bernfile,bernie)
+bernfile.close()
 
-trumpfile = open("csvs/donny.csv","r+")
+trumpfile = open("csvs/donny.csv","wb")
 write_to_file(trumpfile,trump)
+trumpfile.close()
 
 #csv to json
+hilfile = open("csvs/hillary.csv","r+")
+bernfile = open("csvs/bernie.csv","r+")
+trumpfile = open("csvs/donny.csv","r+")
+
 data_B = pd.read_csv(bernfile, quoting=csv.QUOTE_NONE)
 data_D = pd.read_csv(hilfile, quoting=csv.QUOTE_NONE)
 data_H = pd.read_csv(trumpfile, quoting=csv.QUOTE_NONE)
