@@ -11,6 +11,26 @@ import AnalysisAPI
 
 def Main():
 
+	twitterHandle = sys.argv[1]
+	userTweets = []
+	csvFile = open("user.csv", "wb")
+
+	AnalysisAPI.pullTweets(userTweets, twitterHandle)
+	AnalysisAPI.writeToFile(csvFile, userTweets)
+	csvFile.close()
+
+	userDictionary ={}
+	userArray = []
+
+	print "_______________________________________________________\n   USER:"
+
+	userDictionary = AnalysisAPI.parseCSV("user.csv")
+	userArray = AnalysisAPI.createArray(userDictionary)
+
+	AnalysisAPI.mostUsed(20, userArray, userDictionary)
+
+
+	"""
 	hillaryDictionary = {}
 	hillaryArray = []
 
@@ -49,7 +69,7 @@ def Main():
 	donnyArray = AnalysisAPI.createArray(donnyDictionary)
 
 	AnalysisAPI.mostUsed(20, donnyArray, donnyDictionary)
-
+	"""
 
 
 Main()

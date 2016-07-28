@@ -1,5 +1,6 @@
 import sys
 import csv
+import tweepy
 from math import log
 
 __author__ = "Brandon Troche"
@@ -9,12 +10,16 @@ __credits__ = ["Brandon Troche", "William Wu",
 __maintainer__ = "Brandon Troche"
 __email__ = "bttroche@gmail.com"
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 """
 -	Compare two cvs's to each other. Say Hillary to Bernie and try to see how similar they are
--	Group together all the stemmed words
 -	Overall percentage for comparisons
 -	Show buzz words/topics that you share with a candidate
+-   bigrams and trigram
+-   cosine similarity
 """
 
 def parseCSV(nameOfCSV):
@@ -25,15 +30,7 @@ def parseCSV(nameOfCSV):
 	wordsDictionary = {}
 
 	for row in reader:
-		#print(', '.join(str(row)))
-		#print(row['name'], row['time'], row['tweet'])
-		#TweetName = str("").join(str(row['name']))
-		#TweetTime = str("").join(str(row['time']))
 		TweetTweet = str("").join(str(row['tweets']))
-
-		#print TweetName
-		#print TweetTime
-		#print TweetTweet
 
 		Tweet = TweetTweet
 		tweetArray = Tweet.split()
@@ -44,7 +41,6 @@ def parseCSV(nameOfCSV):
 
 	csvfile.close()
 
-	#print wordsDictionary
 	return wordsDictionary
 
 def createArray(SemanticDictionary):
@@ -94,15 +90,26 @@ def sortArray(termArray, SemanticDictionary):
 		sortedArray.insert(0, highestTerm(SemanticDictionary))
 	return sortedArray
 
+def pullTweets(arr, name):
+	consumer_token = '9VvsBn2c4Q5wBSoA3MsBZLbFp'
+	consumer_secret = 'bVPdCJWsjw6Q75UO6FqSPYLJottjbj0Q4kkO46PjyLhlbqp9Il'
+	auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
+	api = tweepy.API(auth)
+
+	for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(10):
+		arr.append(tweet)
+
+def writeToFile(openfile,arr):
+    openfile.write("name,time,tweets\n")
+    for tweet in arr:
+        openfile.write(tweet.user.name + ',' + \
+        str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20).replace('.','',20).replace('-',' ',20) +'\n')
 
 def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs):
-	#print termFrequencyInDoc
-	#print totalTermsInDoc
 	tf = float(termFrequencyInDoc) / float(totalTermsInDoc) 
-	#print tf
 	docFreq = totalDocs / termFreqInCorpus 
 	idf = log(docFreq)
-	#print idf
+
 	return tf*idf
 
 def stopWordsFilter(termArray):
@@ -122,12 +129,9 @@ def stopWordsFilter(termArray):
 	stopWords = []
 	stopWords = stopWordList.split()
 	toRemove = []
-	#print(len(stopWords))
 	for term in termArray:
 		for wordz in stopWords:
 			if(term == wordz):
-				#print term 
-				#print wordz
 				toRemove.append(term)
 
 	for objects in toRemove:
