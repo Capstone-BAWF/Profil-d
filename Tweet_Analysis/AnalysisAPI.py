@@ -20,6 +20,7 @@ sys.setdefaultencoding('utf-8')
 -	Show buzz words/topics that you share with a candidate
 -   bigrams and trigram
 -   cosine similarity
+-   single tweet analysis for most similar tweet from candidate
 """
 
 def parseCSV(nameOfCSV):
