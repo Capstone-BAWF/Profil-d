@@ -23,7 +23,18 @@ sys.setdefaultencoding('utf-8')
 -   single tweet analysis for most similar tweet from candidate
 """
 
-def parseCSV(nameOfCSV):
+"""
+parseCSV_Dictionary(nameOfCSV)
+
+parameters:
+	- nameOfCSV: The name of a csv file that contains a users tweets. 
+
+returns: 
+	- A dictionary created to hold all terms used in the csv file (document) as keys
+	and their number of occurance in the document as values. 
+
+"""
+def parseCSV_Dictionary(nameOfCSV):
 	csvfile = open(nameOfCSV, 'r')
 	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
 
@@ -44,6 +55,60 @@ def parseCSV(nameOfCSV):
 
 	return wordsDictionary
 
+"""
+parseCSV_Vector(nameOfCSV)
+
+parameters:
+	- nameOfCSV: The name of a csv file that contains a users tweets. 
+
+returns: 
+	- An array or vector that contains all the users tweets that exist in
+	a csv file (document) and sorted in the order in which they are appended 
+	is in occordance with their time of occurance. 
+
+"""
+def parseCSV_Vector(nameOfCSV):
+	csvfile = open(nameOfCSV, 'r')
+	reader = csv.DictReader(csvfile, fieldnames = ("name", "time", "tweets"))
+
+	wordsArray = []
+
+	for row in reader:
+		TweetTweet = str("").join(str(row['tweets']))
+
+		tweetArray = TweetTweet.split()
+
+		for items in tweetArray:
+			if items not in wordsArray:
+				wordsArray.append(items.lower())
+
+	csvfile.close()
+
+	return wordsArray
+
+
+
+
+"""def vectorDotProduct(DictionaryA, DictionaryB, VectorA, VectorB, csvFileA, csvFileB):
+	corpusDictionary = DictionaryA
+	for keys in DictionaryB:
+		if(corpusDictionary.has_key(keys)):
+			cor
+"""
+
+"""
+createArray(SemanticDictionary)
+
+parameters:
+	- SemanticDictionary: A dictionary holding the terms in the document without repetition
+	as keys and the number of times they appear in the document as values. 
+
+returns:
+	- An array created based on the contents of the dictionary passed in 'SemanticDictionary'.
+	This array is created, sorted from least to greatest occurance in the document according to
+	its value in the dictionary and then filtered for stop words. 
+
+"""
 def createArray(SemanticDictionary):
 	wordsArray = []
 
@@ -60,7 +125,25 @@ def createArray(SemanticDictionary):
 	return wordsArray
 
 
+"""
+WordAnalysis(SemanticDictionary, Size, TweetArray)
 
+parameters:
+	- SemanticDictionary: A dictionary holding the terms in the document without repetition
+	as keys and the number of times they appear in the document as values. 
+	- Size: The size of the array given as a parameter in 'TweetArray'.
+	- TweetArray: An array or vector populated with terms in the document.  
+
+Augments:
+	- Does not return an object. Instead this function augments the contents of 
+	the dictionary passed in the parameter 'SemanticDictionary' in the following
+	fashion: if the term already exists in the dictionary as a key then we increment
+	the value of that key where the value represents the amount of times the key(term) 
+	was used in the document. If the term does not exist in the dictionary then it has
+	not been seen yet and we create a space in the dictionary for a new key and set its
+	value to 1.
+
+"""
 def WordAnalysis(SemanticDictionary, Size, TweetArray):
 	for i in range(Size):
 		if(SemanticDictionary.has_key(TweetArray[i].lower())):
@@ -68,13 +151,59 @@ def WordAnalysis(SemanticDictionary, Size, TweetArray):
 		else: 
 			SemanticDictionary[TweetArray[i].lower()] = 1
 
+
+"""
+mostUsed(numberOfMostUsed, termArray, SemanticDictionary)
+
+*** Use only on a sorted array ***
+parameters:
+	- numberOfMostUsed: Signifies the number of terms you'd like to print.
+	- termArray: An array or vector populated with all the terms in the document without 
+	repetition.
+	- SemanticDictionary: A dictionary holding the terms in the document without repetition
+	as keys and the number of times they appear in the document as values. 
+
+prints:
+	- A specified number of terms and their number of uses in the document from greatest to 
+	least used.
+"""
 def mostUsed(numberOfMostUsed, termArray, SemanticDictionary):
+	if numberOfMostUsed > len(termArray):
+		numberOfMostUsed -= numberOfMostUsed - len(termArray)
 	for terms in range(numberOfMostUsed):
 		print "The term '%s' appeared '%s' times." % (termArray[len(termArray) - terms - 1], checkTerm(termArray[len(termArray) - terms - 1], SemanticDictionary))
 
-def checkTerm(Term, SemanticDictionary):
-	return SemanticDictionary[Term]
+"""
+checkTerm(Term, SemanticDictionary)
 
+parameters:
+	- Term: Any string in all lower case.
+	- SemanticDictionary: A dictionary holding the terms in the document without repetition
+	as keys and the number of times they appear in the document as values. 
+
+returns:
+	- The corresponding value of a key in a dictionary. For this use, it will specifically
+	return the number of times the term was used in the document. 
+"""
+def checkTerm(Term, SemanticDictionary):
+	if(SemanticDictionary.has_key(Term)):
+		return SemanticDictionary[Term]
+	else:
+		return 0
+
+"""
+highestTerm(SemanticDictionary)
+
+parameters:
+	- SemanticDictionary: A dictionary holding the terms in the document without repetition
+	as keys and the number of times they appear in the document as values. 
+
+returns:
+	- The string in the document that appears the most amount of times. 
+
+deletes:
+	- deletes from the dictionary the string that was returned. 
+"""
 def highestTerm(SemanticDictionary):
 	tempLargest = 0
 	tempString = "All equally used"
@@ -85,12 +214,43 @@ def highestTerm(SemanticDictionary):
 	del SemanticDictionary[tempString]
 	return tempString
 
+
+"""
+sortArray(termArray, SemanticDictionary)
+
+parameters:
+	- termArray: An array or vector containing all the terms in the document. 
+	- SemanticDictionary: A dictionary holding the terms in the document without repetition
+	as keys and the number of times they appear in the document as values. 
+
+returns:
+	- A sorted array of terms based on the dictionary containing all terms and values in
+	the document.
+
+sort order: 
+	- least to greatest use of the term in the document. Such that the first element of the
+	array or vector is the word that occurs the least amount of times and the last element in 
+	the array or vector is the word that occurs the most amount of times. 
+"""
 def sortArray(termArray, SemanticDictionary):
 	sortedArray = []
 	for objs in termArray:
 		sortedArray.insert(0, highestTerm(SemanticDictionary))
 	return sortedArray
 
+"""
+pullTweets(arr, name)
+
+parameters:
+	- arr: An empty array that can hold the tweets of a defined user. 
+	- name: The twitter handle of a user whose tweets with be pulled.
+
+Augments:
+	- Does not return an object. Instead this function augments the contents of 
+	the array in the parameter 'arr' to hold the tweets pulled from the users
+	account based on their twitter handle stored in 'name'. 
+
+"""
 def pullTweets(arr, name):
 	consumer_token = '9VvsBn2c4Q5wBSoA3MsBZLbFp'
 	consumer_secret = 'bVPdCJWsjw6Q75UO6FqSPYLJottjbj0Q4kkO46PjyLhlbqp9Il'
@@ -100,12 +260,38 @@ def pullTweets(arr, name):
 	for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(10):
 		arr.append(tweet)
 
+"""
+writeToFile(openfile,arr)
+
+parameters:
+	- openfile: a variable containing an open csv file that is opened with the intention to 
+	write back. [i.e... open('csv', 'wb')]
+	- arr: an array populated with the tweets of a user.
+
+Augments:
+	- Does not return an object. Instead this function augments the contents of 
+	the csv file to contain all of the tweets of the user in order of occurance. 
+
+"""
 def writeToFile(openfile,arr):
     openfile.write("name,time,tweets\n")
     for tweet in arr:
         openfile.write(tweet.user.name + ',' + \
         str(tweet.created_at) + ',' + tweet.text.replace(',','',20).replace('\n',' ',20).replace('.','',20).replace('-',' ',20) +'\n')
 
+"""
+termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs)
+
+parameters:
+	- termFreqInDoc: The amount of times a term or string occurs in the document.
+	- totalTermsInDoc: The total amount of different terms that exist in the document.
+	- termFreqInCorpus: The amount of times a term occurs in the entire corpus.
+	- totalDocs: The total amount of documents that make up the corpus.
+
+returns:
+	- The calculated term frequency inverse document frequency of that term in the corpus. 
+
+"""
 def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDocs):
 	tf = float(termFrequencyInDoc) / float(totalTermsInDoc) 
 	docFreq = totalDocs / termFreqInCorpus 
@@ -113,6 +299,17 @@ def termDocWeight(termFrequencyInDoc, totalTermsInDoc, termFreqInCorpus, totalDo
 
 	return tf*idf
 
+"""
+stopWordsFilter(termArray)
+
+parameters:
+	- termArray: An array or vector populated with the terms that exist in the document.
+
+augments:
+	- Does not return an object. Instead this function augments the contents of 
+	the array given in 'termArray' to delete words that appear in a list of predetermined 
+	stop words.  
+"""
 def stopWordsFilter(termArray):
 	stopWordList = "a about above after again against all am an and any are \
 	aren't as at be because been before being below between both but by can't \
@@ -138,5 +335,3 @@ def stopWordsFilter(termArray):
 	for objects in toRemove:
 		termArray.remove(objects)
 
-def stemming(termArray):
-	return 0

@@ -25,15 +25,15 @@ def Main():
 
 	#cos_sin = 0.8215838362577491
 
-	first = 9.0
-	second = 120.0
+	#first = 9.0
+	#second = 120.0
 
-	third = first/math.sqrt(second)
+	#third = first/math.sqrt(second)
 
 	#print math.acos(cos_sin)
-	print math.degrees(math.acos(third))
+	#print math.degrees(math.acos(third))
 
-	"""
+	
 	twitterHandle = sys.argv[1]
 	userTweets = []
 	csvFile = open("user.csv", "wb")
@@ -47,11 +47,15 @@ def Main():
 
 	print "_______________________________________________________\n   USER:"
 
-	userDictionary = AnalysisAPI.parseCSV("user.csv")
-	userArray = AnalysisAPI.createArray(userDictionary)
+	userDictionary = AnalysisAPI.parseCSV_Dictionary("user.csv")
+	#userArray = AnalysisAPI.createArray(userDictionary)
+	userArray = AnalysisAPI.parseCSV_Vector("user.csv")
 
-	AnalysisAPI.mostUsed(20, userArray, userDictionary)
-	"""
+	print userArray
+	print AnalysisAPI.checkTerm("jump", userDictionary)
+
+	#AnalysisAPI.mostUsed(20, userArray, userDictionary)
+	
 
 	"""
 	hillaryDictionary = {}
