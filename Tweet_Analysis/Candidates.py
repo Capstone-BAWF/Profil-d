@@ -68,7 +68,7 @@ def Main():
 	AnalysisAPI.WordAnalysis(userDictionary, len(userArray), userArray)
 
 	#print AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary)
-
+	"""
 	VectorA = ["julie", "loves", "me", "more", "than", "linda", "jane", "likes"]
 	DictA = {"julie":1, "loves":2, "me":2, "more":1, "than":1, "linda":1, "jane":0, "likes":0}
 	DictB = {"julie":1, "loves":1, "me":2, "more":1, "than":1, "linda":0, "jane":1, "likes":1}
@@ -81,13 +81,13 @@ def Main():
 	print math.degrees(math.cos(something))
 
 	print "_______________________________________________________"
+	"""
 
 	print AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary)
 	print AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary)
 	print AnalysisAPI.vectorNorm(hillaryArray, userDictionary)
 	variable = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary), AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary), AnalysisAPI.vectorNorm(hillaryArray, userDictionary))
 	print variable
-	print math.degrees(math.cos(variable))
 
 	"""
 	hillaryDictionary = {}
