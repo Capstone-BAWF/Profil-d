@@ -33,7 +33,7 @@ def Main():
 	#print math.acos(cos_sin)
 	#print math.degrees(math.acos(third))
 
-	
+	"""
 	twitterHandle = sys.argv[1]
 	userTweets = []
 	csvFile = open("user.csv", "wb")
@@ -55,7 +55,33 @@ def Main():
 	print AnalysisAPI.checkTerm("jump", userDictionary)
 
 	#AnalysisAPI.mostUsed(20, userArray, userDictionary)
-	
+	"""
+
+	hillaryDictionary = AnalysisAPI.parseCSV_Dictionary("hillary_2.csv")
+
+	hillaryArray = AnalysisAPI.parseCSV_Vector("hillary_2.csv")
+
+	userArray = AnalysisAPI.parseCSV_Vector("user.csv")
+
+	print userArray
+
+	print "_______________________________________________________"
+
+	print hillaryArray
+
+	userDictionary = AnalysisAPI.createUserDictionary(hillaryDictionary, hillaryArray, userArray)
+
+	print "_______________________________________________________"
+
+	print hillaryArray
+
+	print "_______________________________________________________"
+
+	print userDictionary
+
+	print "_______________________________________________________"
+
+	print hillaryDictionary
 
 	"""
 	hillaryDictionary = {}

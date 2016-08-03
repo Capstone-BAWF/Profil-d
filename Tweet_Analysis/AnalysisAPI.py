@@ -87,14 +87,21 @@ def parseCSV_Vector(nameOfCSV):
 	return wordsArray
 
 
+#def 
 
+def createUserDictionary(DictionaryA, VectorA, VectorB):
+	for term in VectorB:
+		if(not DictionaryA.has_key(term)):
+			VectorA.append(term)
+			DictionaryA[term] = 0
 
-"""def vectorDotProduct(DictionaryA, DictionaryB, VectorA, VectorB, csvFileA, csvFileB):
-	corpusDictionary = DictionaryA
-	for keys in DictionaryB:
-		if(corpusDictionary.has_key(keys)):
-			cor
-"""
+	newDictionary = {}
+
+	for keys in DictionaryA:
+		newDictionary[keys] = 0
+
+	return newDictionary
+
 
 """
 createArray(SemanticDictionary)
