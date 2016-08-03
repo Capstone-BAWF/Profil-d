@@ -2,6 +2,9 @@ import sys
 import csv
 import tweepy
 from math import log
+from math import sqrt
+from math import acos
+from math import degrees
 
 __author__ = "Brandon Troche"
 __copyright__ = "Copyright 2016, Profil-d"
@@ -86,8 +89,26 @@ def parseCSV_Vector(nameOfCSV):
 
 	return wordsArray
 
+def cosineSimilarity(dotProduct, vectorNormA, vectorNormB):
+	Numerator = dotProduct
+	Denominator = sqrt(vectorNormA * vectorNormB)
 
-#def 
+	return Numerator/Denominator
+	#return degrees(acos(Numerator/Denominator))
+
+def vectorNorm(Vector, SemanticDictionary):
+	total = 0
+	for i in Vector:
+		total += SemanticDictionary[i]**2
+
+	return total
+
+def vectorDotProduct(VectorA, DictionaryA, DictionaryB):
+	total = 0
+	for i in VectorA:
+		total += DictionaryA[i] * DictionaryB[i]
+
+	return total
 
 def createUserDictionary(DictionaryA, VectorA, VectorB):
 	for term in VectorB:
