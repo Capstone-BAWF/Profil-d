@@ -5,131 +5,48 @@ import AnalysisAPI
 
 
 #client = MongoClient('mongodb://local_host')
-
 """
-	[:To Do:]
-
-	- Create proper term vectors
-	- Dot product between vectors
-	- Vector norm calculation 
-	- Implement the formula for cosine similarity 
-		arccos^-1 [ ( dot-product of vector a and vector b ) / sqrt( vector_normA * vector_normB ) ]
-	- Implement the analysis of the directive similarity of vectors 
-
+	Notes: The number of tweets taken from the user must be compared with 
+	an equal (or close to equal) number of tweets from the candidate. Or else
+	the number will be skewed. 
 """
-
-
 
 def Main():
 
-	#cos_sin = 0.8215838362577491
-
-	#first = 9.0
-	#second = 120.0
-
-	#third = first/math.sqrt(second)
-
-	#print math.acos(cos_sin)
-	#print math.degrees(math.acos(third))
-
-	"""
+	
 	twitterHandle = sys.argv[1]
+	politicalCandidate = sys.argv[2]
+	politicalCandidate += ".csv"
 	userTweets = []
 	csvFile = open("user.csv", "wb")
 
+	
 	AnalysisAPI.pullTweets(userTweets, twitterHandle)
 	AnalysisAPI.writeToFile(csvFile, userTweets)
 	csvFile.close()
-
+	
 	userDictionary ={}
 	userArray = []
 
-	print "_______________________________________________________\n   USER:"
+	candidateDictionary = AnalysisAPI.parseCSV_Dictionary(politicalCandidate)
 
-	userDictionary = AnalysisAPI.parseCSV_Dictionary("user.csv")
-	#userArray = AnalysisAPI.createArray(userDictionary)
+	candidateArray = AnalysisAPI.parseCSV_Vector(politicalCandidate)
+
 	userArray = AnalysisAPI.parseCSV_Vector("user.csv")
 
-	print userArray
-	print AnalysisAPI.checkTerm("jump", userDictionary)
+	userDictionary = AnalysisAPI.createUserDictionary(candidateDictionary, candidateArray, userArray)
 
-	#AnalysisAPI.mostUsed(20, userArray, userDictionary)
-	"""
+	#userArray = AnalysisAPI.parseCSV_Vector("donny.csv")
 
-	hillaryDictionary = AnalysisAPI.parseCSV_Dictionary("hillary.csv")
-
-	hillaryArray = AnalysisAPI.parseCSV_Vector("hillary.csv")
-
-	userArray = AnalysisAPI.parseCSV_Vector("donny.csv")
-
-	userDictionary = AnalysisAPI.createUserDictionary(hillaryDictionary, hillaryArray, userArray)
+	#userDictionary = AnalysisAPI.createUserDictionary(candidateDictionary, candidateArray, userArray)
 
 	AnalysisAPI.WordAnalysis(userDictionary, len(userArray), userArray)
 
-	#print AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary)
-	"""
-	VectorA = ["julie", "loves", "me", "more", "than", "linda", "jane", "likes"]
-	DictA = {"julie":1, "loves":2, "me":2, "more":1, "than":1, "linda":1, "jane":0, "likes":0}
-	DictB = {"julie":1, "loves":1, "me":2, "more":1, "than":1, "linda":0, "jane":1, "likes":1}
-
-	print AnalysisAPI.vectorDotProduct(VectorA, DictA, DictB)
-	print AnalysisAPI.vectorNorm(VectorA, DictA)
-	print AnalysisAPI.vectorNorm(VectorA, DictB)
-	something = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(VectorA, DictA, DictB), AnalysisAPI.vectorNorm(VectorA, DictA), AnalysisAPI.vectorNorm(VectorA, DictB))
-	print something
-	print math.degrees(math.cos(something))
-
-	print "_______________________________________________________"
-	"""
-
-	#print AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary)
-	#print AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary)
-	#print AnalysisAPI.vectorNorm(hillaryArray, userDictionary)
-	similarity = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary), AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary), AnalysisAPI.vectorNorm(hillaryArray, userDictionary))
+	similarity = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(candidateArray, candidateDictionary, userDictionary), AnalysisAPI.vectorNorm(candidateArray, candidateDictionary), AnalysisAPI.vectorNorm(candidateArray, userDictionary))
 	print similarity
+	print round(similarity * 100, 2)
 
-	return similarity
-
-	"""
-	hillaryDictionary = {}
-	hillaryArray = []
-
-	print " HILLARY: "
-
-	#commandLine = str(sys.argv[1])
-
-	hillaryDictionary = AnalysisAPI.parseCSV("hillary.csv")
-
-	hillaryArray = AnalysisAPI.createArray(hillaryDictionary)
-
-	AnalysisAPI.mostUsed(20, hillaryArray, hillaryDictionary)
-
-	
-	print "_______________________________________________________"
-	print " BERNIE: "
-
-	bernieDictionary = {}
-	bernieArray = []
-
-	bernieDictionary = AnalysisAPI.parseCSV("bernie.csv")
-
-	bernieArray = AnalysisAPI.createArray(bernieDictionary)
-
-	AnalysisAPI.mostUsed(20, bernieArray, bernieDictionary)
-
-	
-	print "_______________________________________________________"
-	print " DONALD DUCK: "
-
-	donnyDictionary = {}
-	donnyArray = []
-
-	donnyDictionary = AnalysisAPI.parseCSV("donny.csv")
-
-	donnyArray = AnalysisAPI.createArray(donnyDictionary)
-
-	AnalysisAPI.mostUsed(20, donnyArray, donnyDictionary)
-	"""
+	return round(similarity * 100, 2)
 
 
 Main()

@@ -380,7 +380,7 @@ def pullTweets(arr, name):
 	auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
 	api = tweepy.API(auth)
 
-	for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(10):
+	for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(100):
 		arr.append(tweet)
 
 """
