@@ -1,6 +1,5 @@
 import sys
 import csv
-import math
 from pymongo import MongoClient
 import AnalysisAPI
 
@@ -57,11 +56,11 @@ def Main():
 	#AnalysisAPI.mostUsed(20, userArray, userDictionary)
 	"""
 
-	hillaryDictionary = AnalysisAPI.parseCSV_Dictionary("hillary_2.csv")
+	hillaryDictionary = AnalysisAPI.parseCSV_Dictionary("hillary.csv")
 
-	hillaryArray = AnalysisAPI.parseCSV_Vector("hillary_2.csv")
+	hillaryArray = AnalysisAPI.parseCSV_Vector("hillary.csv")
 
-	userArray = AnalysisAPI.parseCSV_Vector("user.csv")
+	userArray = AnalysisAPI.parseCSV_Vector("donny.csv")
 
 	userDictionary = AnalysisAPI.createUserDictionary(hillaryDictionary, hillaryArray, userArray)
 
@@ -83,11 +82,13 @@ def Main():
 	print "_______________________________________________________"
 	"""
 
-	print AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary)
-	print AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary)
-	print AnalysisAPI.vectorNorm(hillaryArray, userDictionary)
-	variable = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary), AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary), AnalysisAPI.vectorNorm(hillaryArray, userDictionary))
-	print variable
+	#print AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary)
+	#print AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary)
+	#print AnalysisAPI.vectorNorm(hillaryArray, userDictionary)
+	similarity = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(hillaryArray, hillaryDictionary, userDictionary), AnalysisAPI.vectorNorm(hillaryArray, hillaryDictionary), AnalysisAPI.vectorNorm(hillaryArray, userDictionary))
+	print similarity
+
+	return similarity
 
 	"""
 	hillaryDictionary = {}

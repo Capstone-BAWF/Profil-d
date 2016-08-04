@@ -11,18 +11,17 @@ __copyright__ = "Copyright 2016, Profil-d"
 __credits__ = ["Brandon Troche", "William Wu", 
                "Ada Chen", "Fabio Francios", "Felix Grezes"]
 __maintainer__ = "Brandon Troche"
+__documentor__ = "Brandon Troche"
 __email__ = "bttroche@gmail.com"
+__git__ = "www.github.com/BrandonTroche"
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
 """
--	Compare two cvs's to each other. Say Hillary to Bernie and try to see how similar they are
--	Overall percentage for comparisons
 -	Show buzz words/topics that you share with a candidate
 -   bigrams and trigram
--   cosine similarity
 -   single tweet analysis for most similar tweet from candidate
 """
 
@@ -89,6 +88,23 @@ def parseCSV_Vector(nameOfCSV):
 
 	return wordsArray
 
+"""
+cosineSimilarity(dotProduct, vectorNormA, vectorNormB)
+
+parameters:
+	- dotProduct: The respective dot product of two vectors.
+	- vectorNormA: The norm of the vector of the first document.
+	- vectorNormB: The norm of the vector of the second document. 
+	
+
+returns:
+	- The cosine similarity of both documents to each other. 
+
+Give the formula:
+
+	VectorA.VectorB / sqrt( norm(VectorA) * norm(VectorB) )
+
+"""
 def cosineSimilarity(dotProduct, vectorNormA, vectorNormB):
 	Numerator = dotProduct
 	Denominator = sqrt(vectorNormA * vectorNormB)
@@ -96,6 +112,17 @@ def cosineSimilarity(dotProduct, vectorNormA, vectorNormB):
 	return Numerator/Denominator
 	#return degrees(acos(Numerator/Denominator))
 
+"""
+vectorNorm(Vector, SemanticDictionary)
+
+parameters:
+	- Vector: A vector or array that contains terms present in specific a document. 
+	
+
+returns:
+	- The norm of the vector. [i.e. the sum of all elements in the vector squared.] 
+
+"""
 def vectorNorm(Vector, SemanticDictionary):
 	total = 0
 	for i in Vector:
@@ -103,6 +130,52 @@ def vectorNorm(Vector, SemanticDictionary):
 
 	return total
 
+"""
+def vectorDotProduct(VectorA, DictionaryA, DictionaryB)
+
+parameters:
+	- DictionaryA: A dictionary that contains all of the terms and their values in the first 
+	document with respect to all terms present in both documents.
+	- DictionaryB: A dictionary that contains all of the terms and their values in the second 
+	document with respect to all terms present in both documents.
+	- VectorA: An augmented vector or array containing the terms present in both documents 
+	with respect to the first documents terms. [i.e. the terms present in the first document
+	come first in the array and are then followed by the terms in the second document. These 
+	terms are listed in order of appearance without repetition.]
+	
+
+returns:
+	- The respective dot product of both arrays/vectors present in the variables 'VectorA' and
+	'VectorB.'
+
+How?
+	- This function uses the dictionaries 'DictionaryA' and 'DictionaryB' to store the values of
+	all terms in the two documents. "Document A" would be the first document and "Document B" would
+	be the second where the dictionaries with the respective tag letters hold that documents values. 
+	The dot product is computed by using the universal vector 'VectorA' that contains all terms in 
+	order of appearance without repetition assuming 'Document A' is read first. The terms in this 
+	vector are checked with the dictionaries holding the values to compute accurately positioned
+	vector elements.
+
+For Example:
+
+	VectorA = ["jack", "loves", "me", "more", "than", "mark", "jason", "likes"]
+	DictA = {"jack":1, "loves":2, "me":2, "more":1, "than":1, "mark":1, "jason":0, "likes":0}
+	DictB = {"jack":1, "loves":1, "me":2, "more":1, "than":1, "mark":0, "jason":1, "likes":1}
+
+	print AnalysisAPI.vectorDotProduct(VectorA, DictA, DictB)
+
+	THE ABOVE CODE SHOULD OUTPUT: 9.
+
+	SENTENCE 1: JACK LOVES ME MORE THAN MARK LOVES ME
+	SENTENCE 2: JACK LOVES ME MORE THAN JASON LIKES ME
+
+***** This has a more in-depth explaination than the other funtions because I figured
+some people who read this documentation might not understand what I had in mind for this 
+implementation or may have some questions about how it works and links together with 
+itself in general. *****
+
+"""
 def vectorDotProduct(VectorA, DictionaryA, DictionaryB):
 	total = 0
 	for i in VectorA:
@@ -110,6 +183,28 @@ def vectorDotProduct(VectorA, DictionaryA, DictionaryB):
 
 	return total
 
+"""
+createUserDictionary(DictionaryA, VectorA, VectorB)
+
+parameters:
+	- DictionaryA: A dictionary that contains all of the terms in the first document.
+	- VectorA: A vector or array containing the terms present in the first document.
+	- VectorB: A vector or array containing the terms present in the second document. 
+
+returns:
+	- A dictionary that will contain all of the words present in both documents. This
+	dictionary is only to be used as a reference to the first document when calculating
+	cosine similarity as it contains 0's in all the places where words appear in the second
+	document that do not occur in the first appended to the end of the vector. 
+
+Augments:
+	- This function also changes the contents of the array passed in variable 'VectorA' to also
+	contain all of the words present in the array 'VectorB' that are not present in 'VectorA.' 
+	This means all of the words present in the document are now stored in 'VectorA' based on the
+	contents of the first document. This allows for an accurate calculation of vector dot product
+	later on.
+
+"""
 def createUserDictionary(DictionaryA, VectorA, VectorB):
 	for term in VectorB:
 		if(not DictionaryA.has_key(term)):
