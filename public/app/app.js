@@ -9,21 +9,28 @@ profild.controller('homeController', function($scope, $http, $rootScope, $locati
 		$scope.pageClass = 'page-home';
 		$scope.twitterName = "";
 
-		$scope.submit = function(){
+		$scope.submit = function() {
 			$http.post("/api/userGen/" + $scope.twitterName).success(function(twitterName, err) {
 				console.log('Data sent');
 			})
 		};
 });
 
-profild.controller('candidateController', function($scope) {
+profild.controller('candidateController', function($scope, $http, $rootScope, $location) {
 		$scope.pageClass = 'page-candidate';
 		$scope.candidate = "";
+
+		$scope.submit = function() {
+			$http.get("/api/candidatePick/" + $scope.candidate)
+				.success(function(candidate, err) {
+					console.log('Data sent');
+				})
+		};
 });
 
 profild.controller('resultController', function($scope) {
 		$scope.pageClass = 'page-result';
-		$scope.result = "";	
+		$scope.result = "";
 });
 
 profild.controller('aboutController', function($scope) {
