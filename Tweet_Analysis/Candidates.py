@@ -1,17 +1,33 @@
 import sys
 import csv
+#import pymongo
 from pymongo import MongoClient
 import AnalysisAPI
 
 
-#client = MongoClient('mongodb://local_host')
+client = MongoClient('mongodb://localhost:27017/answerdb')
 """
 	Notes: The number of tweets taken from the user must be compared with 
 	an equal (or close to equal) number of tweets from the candidate. Or else
 	the number will be skewed. 
+
+	USE: python Candidates.py User_Twitter_Handle Political_Candidate_First_Name
+
+	- Implement Mongo
+
+	dictionary = {c^username/hillary: 45.01}
+
+
 """
 
 def Main():
+
+	#arr = []
+	#twitterHandle = sys.argv[1]
+	#csvFile = open("bernie.csv", "wb")
+	#AnalysisAPI.pullTweets(arr, twitterHandle)
+	#AnalysisAPI.writeToFile(csvFile, arr)
+	
 
 	
 	twitterHandle = sys.argv[1]
@@ -43,10 +59,15 @@ def Main():
 	AnalysisAPI.WordAnalysis(userDictionary, len(userArray), userArray)
 
 	similarity = AnalysisAPI.cosineSimilarity(AnalysisAPI.vectorDotProduct(candidateArray, candidateDictionary, userDictionary), AnalysisAPI.vectorNorm(candidateArray, candidateDictionary), AnalysisAPI.vectorNorm(candidateArray, userDictionary))
-	print similarity
+	#print similarity
+
 	print round(similarity * 100, 2)
+	similarity = round(similarity * 100, 2)
+	#return round(similarity * 100, 2)
 
-	return round(similarity * 100, 2)
-
+	db = client.test
+	dbkey = "c^" + sys.argv[1] + "/" + sys.argv[2]
+	result = db.results.insert_one({dbkey : similarity})
+	
 
 Main()

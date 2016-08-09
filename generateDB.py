@@ -32,6 +32,7 @@ that registered the api. add a username to search so we dont pull Will's tweets
 #results = api.user_timeline(screen_name="realDonaldTrump")
 
 #this prints out the handle, username, and post date of the tweet selected
+
 def print_tweet(tweet):
     print "@%s - %s (%s)" % (tweet.user.screen_name, tweet.user.name, tweet.created_at)
     print tweet.text
@@ -48,15 +49,6 @@ def add_tweets(arr, name):
     for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(10):
         arr.append(tweet)
 
-clinton = []
-add_tweets(clinton,"HillaryClinton")
-
-bernie = []
-add_tweets(bernie,"BernieSanders")
-
-trump = []
-add_tweets(trump,"realDonaldTrump")
-
 #writing array of tweets to file
 def write_to_file(openfile,arr):
     openfile.write("name,time,tweets\n")
@@ -64,32 +56,46 @@ def write_to_file(openfile,arr):
         openfile.write(tweet.user.name + ',' + \
         str(tweet.created_at) + ',' + tweet.text.replace(',',' ',20).replace('\n',' ',20).replace('.',' ',20).replace('-',' ',20) +'\n')
 
-hilfile = open("csvs/hillary.csv","wb")
-write_to_file(hilfile,clinton)
-hilfile.close()
+def main(argv):
+    clinton = []
+    add_tweets(clinton,"HillaryClinton")
 
-bernfile = open("csvs/bernie.csv","wb")
-write_to_file(bernfile,bernie)
-bernfile.close()
+    bernie = []
+    add_tweets(bernie,"BernieSanders")
 
-trumpfile = open("csvs/donny.csv","wb")
-write_to_file(trumpfile,trump)
-trumpfile.close()
+    trump = []
+    add_tweets(trump,"realDonaldTrump")
 
-#csv to json
-hilfile = open("csvs/hillary.csv","r+")
-bernfile = open("csvs/bernie.csv","r+")
-trumpfile = open("csvs/donny.csv","r+")
 
-data_B = pd.read_csv(bernfile, quoting=csv.QUOTE_NONE)
-data_D = pd.read_csv(hilfile, quoting=csv.QUOTE_NONE)
-data_H = pd.read_csv(trumpfile, quoting=csv.QUOTE_NONE)
+    hilfile = open("csvs/hillary.csv","wb")
+    write_to_file(hilfile,clinton)
+    hilfile.close()
 
-data_Bjson = json.loads(data_B.to_json(orient = 'records'))
-data_Djson = json.loads(data_D.to_json(orient = 'records'))
-data_Hjson = json.loads(data_H.to_json(orient = 'records'))
+    bernfile = open("csvs/bernie.csv","wb")
+    write_to_file(bernfile,bernie)
+    bernfile.close()
 
-#insert jsons into mongoDB collections
-collection_B.insert(data_Bjson)
-collection_D.insert(data_Djson)
-collection_H.insert(data_Hjson)
+    trumpfile = open("csvs/donny.csv","wb")
+    write_to_file(trumpfile,trump)
+    trumpfile.close()
+
+    #csv to json
+    hilfile = open("csvs/hillary.csv","r+")
+    bernfile = open("csvs/bernie.csv","r+")
+    trumpfile = open("csvs/donny.csv","r+")
+
+    data_B = pd.read_csv(bernfile, quoting=csv.QUOTE_NONE)
+    data_D = pd.read_csv(hilfile, quoting=csv.QUOTE_NONE)
+    data_H = pd.read_csv(trumpfile, quoting=csv.QUOTE_NONE)
+
+    data_Bjson = json.loads(data_B.to_json(orient = 'records'))
+    data_Djson = json.loads(data_D.to_json(orient = 'records'))
+    data_Hjson = json.loads(data_H.to_json(orient = 'records'))
+
+    #insert jsons into mongoDB collections
+    collection_B.insert(data_Bjson)
+    collection_D.insert(data_Djson)
+    collection_H.insert(data_Hjson)
+
+if __name__ == __main__:
+    main(sys.argv)

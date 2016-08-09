@@ -21,8 +21,8 @@ sys.setdefaultencoding('utf-8')
 
 """
 -	Show buzz words/topics that you share with a candidate
--   bigrams and trigram
 -   single tweet analysis for most similar tweet from candidate
+-	Only have the candidate tweets take 100 instead of 1000.
 """
 
 """
