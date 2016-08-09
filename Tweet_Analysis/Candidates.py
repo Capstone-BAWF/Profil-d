@@ -9,9 +9,20 @@ import AnalysisAPI
 	Notes: The number of tweets taken from the user must be compared with 
 	an equal (or close to equal) number of tweets from the candidate. Or else
 	the number will be skewed. 
+
+	USE: python Candidates.py User_Twitter_Handle Political_Candidate_First_Name
+
+	- Implement Mongo
 """
 
 def Main():
+
+	#arr = []
+	#twitterHandle = sys.argv[1]
+	#csvFile = open("bernie.csv", "wb")
+	#AnalysisAPI.pullTweets(arr, twitterHandle)
+	#AnalysisAPI.writeToFile(csvFile, arr)
+	
 
 	
 	twitterHandle = sys.argv[1]
@@ -47,6 +58,6 @@ def Main():
 	print round(similarity * 100, 2)
 
 	return round(similarity * 100, 2)
-
+	
 
 Main()
