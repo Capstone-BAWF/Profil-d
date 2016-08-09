@@ -4,6 +4,7 @@ var User       = require('../models/user');
 var jwt        = require('jsonwebtoken');
 var config     = require('../../config');
 var TwitterName = require('../models/twitterName');
+var Results 	= require('../models/results');
 var superSecret = config.secret;
 
 module.exports = function(app, express) {
@@ -17,24 +18,8 @@ module.exports = function(app, express) {
 	});
 
 	apiRouter.get('/', function(req, res) {
-			var options = { mode: 'text',
-					scriptPath: './python',
-					args: ['dicks']
-			};
-	/*
-			var pyshell = new PythonShell('jew.py', options);
-			
-			pyshell.on('message', function (message) {
-				var tip = message;
-				console.log(tip);
-			});
-
-			PythonShell.run('jew.py', options, function (err) {
-				if (err) throw err;
-			});
-
-			res.json({ message: "I'm a jew!" });
-	*/
+			user = "";
+			res.json({ message: "On home page." });
 	});
 
 	apiRouter.use(function(req, res, next) {
@@ -43,9 +28,7 @@ module.exports = function(app, express) {
 	});
 	
 	apiRouter.post('/userGen/:twitterName', function(req, res, next) {
-			user = "";
 			user = req.params.twitterName;
-			
 			res.json({ message: "Hello " + user});
 	});
 
@@ -57,7 +40,7 @@ module.exports = function(app, express) {
 							args: [user, candidate]
 			};
 
-			PythonShell.run('jew.py', options, function(err) {
+			PythonShell.run('hello.py', options, function(err) {
 				if (err) throw err;
 			});
 
@@ -66,8 +49,12 @@ module.exports = function(app, express) {
 			res.json({ message: "Hello" + candidate });
 	});
 
-	apiRouter.get('/resultGet/', function(req, res, next) {
-			console.log("Will retrieve result from MongoDB for the User.");
+	apiRouter.get('/resultGet/', function(req, res) {
+			Results.find(function(err, result) {
+				if (err) res.send(err);
+				console.log(result);
+				res.json(result);
+			});
 	});
 
 	return apiRouter;

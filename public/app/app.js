@@ -28,9 +28,17 @@ profild.controller('candidateController', function($scope, $http, $rootScope, $l
 		};
 });
 
-profild.controller('resultController', function($scope) {
+profild.controller('resultController', function($scope, $http, $rootScope, $location) {
 		$scope.pageClass = 'page-result';
-		$scope.result = "";
+		$scope.messages = "anal bag";
+		$http.get('/api/resultGet')
+			.success(function(data) {
+				$scope.result = data;
+				console.log(data);
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+		});
 });
 
 profild.controller('aboutController', function($scope) {
