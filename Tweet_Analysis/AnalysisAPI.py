@@ -14,6 +14,7 @@ __maintainer__ = "Brandon Troche"
 __documentor__ = "Brandon Troche"
 __email__ = "bttroche@gmail.com"
 __git__ = "www.github.com/BrandonTroche"
+__special_thanks__ = "Fabio Francios"
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
