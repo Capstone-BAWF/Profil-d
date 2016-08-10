@@ -11,11 +11,16 @@ client = MongoClient('mongodb://localhost:27017/newDb')
 	an equal (or close to equal) number of tweets from the candidate. Or else
 	the number will be skewed. 
 
-	USE: python Candidates.py User_Twitter_Handle Political_Candidate_First_Name
-
-	- Implement Mongo
+	USAGE: python Candidates.py User_Twitter_Handle Political_Candidate_First_Name
 
 	dictionary = {c^username/hillary: 45.01}
+
+	LEFT TO DO:
+
+	- Make "CACHE" script to recognize the regular expression for repetition to prevent
+	overloading the twitter API.
+
+	- Single tweet analysis.
 
 
 """
@@ -27,7 +32,7 @@ def Main():
 	#csvFile = open("bernie.csv", "wb")
 	#AnalysisAPI.pullTweets(arr, twitterHandle)
 	#AnalysisAPI.writeToFile(csvFile, arr)
-	
+
 
 	
 	twitterHandle = sys.argv[1]
