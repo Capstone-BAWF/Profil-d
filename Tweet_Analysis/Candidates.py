@@ -5,7 +5,7 @@ from pymongo import MongoClient
 import AnalysisAPI
 
 
-client = MongoClient('mongodb://localhost:27017/answerdb')
+client = MongoClient('mongodb://localhost:27017/newDb')
 """
 	Notes: The number of tweets taken from the user must be compared with 
 	an equal (or close to equal) number of tweets from the candidate. Or else
@@ -65,7 +65,7 @@ def Main():
 	similarity = round(similarity * 100, 2)
 	#return round(similarity * 100, 2)
 
-	db = client.test
+	db = client.results
 	dbkey = "c^" + sys.argv[1] + "/" + sys.argv[2]
 	result = db.results.insert_one({dbkey : similarity})
 	

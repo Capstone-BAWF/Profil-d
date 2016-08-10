@@ -66,6 +66,7 @@ profild.controller('aboutController', function($scope) {
     ];
 });
 
+/*
 angular.module('Username').directive('disableBtn', function(){
     return{
         restrict : 'A',
@@ -83,5 +84,5 @@ angular.module('Username').directive('disableBtn', function(){
         }
     };
 });
-
+*/
 // 

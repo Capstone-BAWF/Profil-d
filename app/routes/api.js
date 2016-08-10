@@ -34,16 +34,16 @@ module.exports = function(app, express) {
 
 	apiRouter.get('/candidatePick/:candidate', function(req, res, next) {
 			var candidate = req.params.candidate;
-
+			
 			var options = { mode: 'text',
-							scriptPath: './python',
+							scriptPath: './Tweet_Analysis',
 							args: [user, candidate]
 			};
-
-			PythonShell.run('hello.py', options, function(err) {
+			
+			PythonShell.run('Candidates.py', options, function(err) {
 				if (err) throw err;
 			});
-
+			
 			console.log(candidate);
 			console.log(user);
 			res.json({ message: "Hello" + candidate });
