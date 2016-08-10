@@ -11,14 +11,14 @@ module.exports = function(app, express) {
 	
 	var apiRouter = express.Router();
 	var user = "";
-	
+	var candidate = "";
+
 	apiRouter.use(function(req, res, next) {
 			console.log('Somebody is here.');
 			next();
 	});
 
 	apiRouter.get('/', function(req, res) {
-			user = "";
 			res.json({ message: "On home page." });
 	});
 
@@ -29,11 +29,12 @@ module.exports = function(app, express) {
 	
 	apiRouter.post('/userGen/:twitterName', function(req, res, next) {
 			user = req.params.twitterName;
+			console.log("Twitter is: " + user);
 			res.json({ message: "Hello " + user});
 	});
 
 	apiRouter.get('/candidatePick/:candidate', function(req, res, next) {
-			var candidate = req.params.candidate;
+			candidate = req.params.candidate;
 			
 			var options = { mode: 'text',
 							scriptPath: './Tweet_Analysis',
@@ -44,17 +45,20 @@ module.exports = function(app, express) {
 				if (err) throw err;
 			});
 			
-			console.log(candidate);
-			console.log(user);
+			console.log("Candidate is: " + candidate);
 			res.json({ message: "Hello" + candidate });
 	});
 
 	apiRouter.get('/resultGet/', function(req, res) {
-			Results.find(function(err, result) {
+			var search = "c^" + user + "/" + candidate;
+			console.log("Search term is: " + search);
+			Results.find(search, function(err, result) {
 				if (err) res.send(err);
 				console.log(result);
 				res.json(result);
 			});
+			user = "";
+			candidate = "";
 	});
 
 	return apiRouter;
