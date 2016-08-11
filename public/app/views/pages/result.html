@@ -11,9 +11,10 @@
 <div class="jumbotron text-center" style="background-color: transparent">
     <h1 style="color:white"> The results are in! </h1>
     <h2> What do you think of yourself now? </h2>
-	<h2> {{ messages }} </h1>
-	<h2 ng-repeat="percentages in result"> {{ percentages.percentage }} </h2>
+	
+	<h2> {{ result[0].percentage }} </h2>
 </div>
+
 <form novalidate class="simple-form" action="/">
         <div class="form-group text-center">
             <button type="submit" class="btn btn-default fancy-button"> Try Again </button>

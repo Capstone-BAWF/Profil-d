@@ -1,6 +1,6 @@
 import sys
 import csv
-#import pymongo
+import datetime
 from pymongo import MongoClient
 import AnalysisAPI
 
@@ -33,13 +33,10 @@ def Main():
 	#AnalysisAPI.pullTweets(arr, twitterHandle)
 	#AnalysisAPI.writeToFile(csvFile, arr)
 
-
-	
 	twitterHandle = sys.argv[1]
-	politicalCandidate = sys.argv[2]
-	politicalCandidate += ".csv"
+	politicalCandidate = "Tweet_Analysis/" + sys.argv[2] + ".csv"
 	userTweets = []
-	csvFile = open("user.csv", "wb")
+	csvFile = open("Tweet_Analysis/user.csv", "wb")
 
 	
 	AnalysisAPI.pullTweets(userTweets, twitterHandle)
@@ -70,9 +67,11 @@ def Main():
 	similarity = round(similarity * 100, 2)
 	#return round(similarity * 100, 2)
 
+	timestamp = datetime.datetime.now()
 	db = client.results
 	dbkey = "c^" + sys.argv[1] + "/" + sys.argv[2]
-	result = db.results.insert_one({dbkey : similarity})
+	result = db.results.insert_one({"key": dbkey, "percentage": similarity, 
+			"dateAdded": timestamp})
 	
 
 Main()

@@ -52,11 +52,13 @@ module.exports = function(app, express) {
 	apiRouter.get('/resultGet/', function(req, res) {
 			var search = "c^" + user + "/" + candidate;
 			console.log("Search term is: " + search);
-			Results.find(search, function(err, result) {
+			Results.find({'key': search}).limit(1).sort({dateAdded: 'descending'})
+			.exec(function(err, result) {
 				if (err) res.send(err);
 				console.log(result);
 				res.json(result);
 			});
+
 			user = "";
 			candidate = "";
 	});
