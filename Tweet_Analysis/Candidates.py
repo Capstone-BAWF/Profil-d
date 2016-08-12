@@ -4,8 +4,8 @@ import datetime
 from pymongo import MongoClient
 import AnalysisAPI
 
+client = MongoClient('mongodb://william:lemons@ds023475.mlab.com:23475/profild')
 
-client = MongoClient('mongodb://localhost:27017/newDb')
 """
 	Notes: The number of tweets taken from the user must be compared with 
 	an equal (or close to equal) number of tweets from the candidate. Or else
@@ -50,7 +50,7 @@ def Main():
 
 	candidateArray = AnalysisAPI.parseCSV_Vector(politicalCandidate)
 
-	userArray = AnalysisAPI.parseCSV_Vector("user.csv")
+	userArray = AnalysisAPI.parseCSV_Vector("Tweet_Analysis/user.csv")
 
 	userDictionary = AnalysisAPI.createUserDictionary(candidateDictionary, candidateArray, userArray)
 
@@ -68,10 +68,10 @@ def Main():
 	#return round(similarity * 100, 2)
 
 	timestamp = datetime.datetime.now()
-	db = client.results
+	db = client.profild
 	dbkey = "c^" + sys.argv[1] + "/" + sys.argv[2]
-	result = db.results.insert_one({"key": dbkey, "percentage": similarity, 
-			"dateAdded": timestamp})
-	
+	result = db.results.insert_one({"key": dbkey, "percentage": similarity,
+			"candidate": sys.argv[2], "user": sys.argv[1], "dateAdded": timestamp})
+	print("Task completed.")
 
 Main()

@@ -11,7 +11,7 @@
 </div>
 
 <div class="col-md-4 col-md-offset-4" style="padding-bottom: 100px">
-    <form novalidate class="simple-form" action="/result" ng-submit=submit()>
+    <form novalidate class="simple-form" ng-submit="submit()">
 		<div class="form-group">
             <select class="form-control fancy-field" ng-model="candidate">
                 <option value="" disabled selected> Select your candidate </option>
@@ -19,9 +19,9 @@
                 <option value="hillary"> Hillary Clinton </option>
                 <option value="bernie"> Bernie Sanders </option>
             </select>
-        </div>
-		<br>
-		<div class="form-group text-center">
+		</div>
+		
+		<div class="form-group text-center" style="padding-top:50px">
 			<button type="submit" class="btn btn-default fancy-button"> Next </button>
        </div>
 	</form>

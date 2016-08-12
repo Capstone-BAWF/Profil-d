@@ -2,7 +2,6 @@
 	h2{color:white;}
 	label{color:white;}
 	p{color:white;}
-}
 </style>
 
 <div class="jumbotron text-center" style="background-color: transparent">
@@ -11,12 +10,24 @@
 </div>
 
 <div class="col-md-4 col-md-offset-4" style="padding-bottom: 100px">
-   <form name="form" action="/candidate" class="simple-form" ng-submit="submit()">
+   <form novalidate name="twitterNameForm" class="simple-form" ng-submit="submit()">
 	<div class="form-group">
-		<input type="text" class="text-center form-control fancy-field" id="twitterName" placeholder="@helodog" ng-model="twitterName" required>
+		<input type="text" class="text-center form-control fancy-field" 
+		id="twitterName" placeholder="@helodog" ng-model="twitterName" 
+		required ng-minlength = "1" ng-maxlength="15" maxlength="15">
+
+		<p ng-show="twitterNameForm.twitterName.$invalid" class="help-block">
+			Twitter username must be 1-15 characters.
+		</p>
+
+		<p ng-show="twitterNameForm.twitterName.$invalid" class="help-block">
+			Twitter username must be 1-15 characters.
+		</p>
 	</div>
-	<div class="form-group text-center">
-		<button type="submit" class="btn btn-default fancy-button"> Next </button>
+
+	<div class="form-group text-center" style="padding-top:50px">
+		<button type="submit" class="btn btn-default fancy-button" 
+		ng-disabled="twitterNameForm.$invalid"> Next </button>
 	</div>
    </form>
 </div>
