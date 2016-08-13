@@ -9,7 +9,9 @@
 </style>
 
 <div class="jumbotron text-center" style="background-color: transparent" ng-show="processing">
-	<h1> LOADING </h1>
+	<span class="glyphicon glyphicon-repeat spinner" style="color:white; font-size:60px">
+	</span> <br><br>
+	<h4 style="color:white"> Analyzing... </h1>
 </div>
 
 <div class="text-center fadeIn" ng-show="result[0]">
@@ -20,10 +22,11 @@
 
 	<div class="text-center">
 		<img src="{{ imgSrc }}" class=img-circle>
-		<h2> Your tweets are {{ result[0].percentage }}% like {{ candidateName }}'s! </h2>
+		<h2> Your tweets are {{ result[0].percentage }}% similar to those of
+			{{ candidateName }}! </h2>
 	</div>
 
-	<div class="text-center" style="padding-top:50px">
+	<div class="text-center" style="padding-top:50px; padding-bottom:150px">
 		<form novalidate class="simple-form" ng-submit="submit()">
 				<div class="form-group text-center">
 					<button type="submit" class="btn btn-default fancy-button"> 
