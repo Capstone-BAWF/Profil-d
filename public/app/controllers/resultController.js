@@ -12,7 +12,7 @@ angular.module('resultController', [])
                 .success(function(data) {
                     $scope.processing = false;
                     $scope.result = data;
-					$scope.imgSrc = "/assets/images/" + $scope.result[0].candidate + ".jpg";
+					$scope.imgSrc = "/assets/images/" + $scope.result[0].candidate + "result.jpg";
                 	$scope.candidateName = $scope.result[0].candidate;
 					if($scope.candidateName == 'donny')
 						$scope.candidateName = 'Donald Trump';
