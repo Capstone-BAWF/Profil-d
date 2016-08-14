@@ -5,8 +5,8 @@ angular.module('aboutController', [])
     $scope.members = [
         { name: 'William Wu', role: 'Full Stack Developer',
             bio: 'Interested in mobile development, experienced in full stack\
-                  development and data science technology. Is also versatile,\
-                  and quick to pickup on new technologies.',
+                  development and familiar with data science technology and\
+				  algorithms. Also versatile, and quick to pickup on new technologies.',
             contact: 'will.go.code@gmail.com',
             pic: '/assets/images/will.jpg' },
         { name: 'Ada Chen', role: 'Front End Developer',
