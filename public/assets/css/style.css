@@ -1,13 +1,13 @@
 /* PAGES */
 
 .page{ 
-    position: relative;
+    position: absolute;
     padding-top: 150px;
     text-align:center; 
     width: 100%;
     height: 100%;
     background-repeat: repeat;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 .page-home{ background: url("home.jpg");}
