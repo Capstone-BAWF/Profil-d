@@ -10,7 +10,8 @@ angular.module('aboutController', [])
             contact: 'will.go.code@gmail.com',
             pic: '/assets/images/will.jpg' },
         { name: 'Ada Chen', role: 'Front End Developer',
-            bio: 'New to web development but interested. Loves to play games.',
+            bio: 'New to web development and assisting with Front-End tasks. Interested\
+				  in application testing and analysis.',
             contact: 'ada77.chen@gmail.com',
             pic: '/assets/images/boo.jpg' },
         { name: 'Fabio Francois', role: 'Back End Developer',
