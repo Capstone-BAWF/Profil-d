@@ -38,6 +38,9 @@ module.exports = function(app, express) {
 			console.log("Candidate is: " + candidate);
 			console.log("Running Python Script.");
 			var pyshell = new PythonShell('Candidates.py', options);
+			pyshell.on('message', function (message) {
+				res.json({ message: Error });
+			});
 			console.log("Python Script Finished.");
 			res.json({ message: "Hello" + candidate });
 	});
