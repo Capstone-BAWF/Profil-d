@@ -38,8 +38,12 @@ def Main():
 	userTweets = []
 	csvFile = open("Tweet_Analysis/user.csv", "wb")
 
-	
-	AnalysisAPI.pullTweets(userTweets, twitterHandle)
+	try:
+		AnalysisAPI.pullTweets(userTweets, twitterHandle)
+	except:
+		print "Error: USER NOT FOUND!"
+		return 0
+
 	AnalysisAPI.writeToFile(csvFile, userTweets)
 	csvFile.close()
 	

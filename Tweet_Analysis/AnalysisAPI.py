@@ -383,6 +383,8 @@ def pullTweets(arr, name):
 
 	for tweet in tweepy.Cursor(api.user_timeline, screen_name=name).items(100):
 		arr.append(tweet)
+	
+
 
 """
 writeToFile(openfile,arr)
