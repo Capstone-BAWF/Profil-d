@@ -11,7 +11,8 @@
 <div class="jumbotron text-center" style="background-color: transparent" ng-show="processing">
 	<span class="glyphicon glyphicon-repeat spinner" style="color:white; font-size:60px">
 	</span> <br><br>
-	<h4 style="color:white"> Analyzing... </h1>
+	<h1 style="color:white"> We're profiling you! </h1>
+	<h2> Give us a few seconds. </h2>
 </div>
 
 <div class="text-center fadeIn" ng-show="result[0]">
@@ -34,5 +35,12 @@
 					</button>
 				</div>
 		</form>
+	</div>
+</div>
+
+<div class="text-center fadeIn" ng-show="ifEmpty">
+	<div class="jumbotron text-center" style="background-color: transparent">
+		<h1 style="color:white"> Somethings gone wrong. </h1>
+		<h2> Press home and try again! </h2>
 	</div>
 </div>
