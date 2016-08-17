@@ -29,7 +29,7 @@ module.exports = function(app, express) {
 	apiRouter.post('/candidatePick/:candidate', function(req, res) {
 			candidate = req.params.candidate;
 			var processing = true;
-
+			var err = "";
 			var options = { mode: 'text',
 							scriptPath: './Tweet_Analysis',
 							args: [user, candidate]
@@ -37,10 +37,8 @@ module.exports = function(app, express) {
 
 			console.log("Candidate is: " + candidate);
 			console.log("Running Python Script.");
-			var pyshell = new PythonShell('Candidates.py', options);
-			pyshell.on('message', function (message) {
-				res.json({ message: Error });
-			});
+			var pyshell = new PythonShell('Candidates.py', options);	
+		
 			console.log("Python Script Finished.");
 			res.json({ message: "Hello" + candidate });
 	});
