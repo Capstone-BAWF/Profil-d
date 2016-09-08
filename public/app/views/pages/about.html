@@ -12,32 +12,11 @@
 </div>
 
 <div class="container">
-	<div class="col-md-3 col-xs-12 text-center" style="padding-bottom:70px">
-		<h4> {{ members[0].name }} </h4>
-		<h5> {{ members[0].role }} </h5>
-		<h6> {{ members[0].contact }} </h6>
-		<img src="{{ members[0].pic }}" class="img-circle"><br><br>
-		<p> {{ members[0].bio }} </p>
-	</div>
-	<div class="col-md-3 col-xs-12 text-center" style="padding-bottom:70px">
-		<h4> {{ members[1].name }} </h4>
-		<h5> {{ members[1].role }} </h5>
-		<h6> {{ members[1].contact }} </h6>
-		<img src="{{ members[1].pic }}" class="img-circle"><br><br>
-		<p> {{ members[1].bio }} </p>
-	</div>
-	<div class="col-md-3 col-xs-12 text-center" style="padding-bottom:70px">
-		<h4> {{ members[2].name }} </h4>
-		<h5> {{ members[2].role }} </h5>
-		<h6> {{ members[2].contact }} </h6>
-		<img src="{{ members[2].pic }}" class="img-circle"><br><br>
-		<p> {{ members[2].bio }} </p>
-	</div>
-	<div class="col-md-3 col-xs-12 text-center" style="padding-bottom:120px">
-		<h4> {{ members[3].name }} </h4>
-		<h5> {{ members[3].role }} </h5>
-		<h6> {{ members[3].contact }} </h6>
-		<img src="{{ members[3].pic }}" class="img-circle"><br><br>
-		<p> {{ members[3].bio }} </p>
+	<div class="col-md-3 col-xs-12 text-center" style="padding-bottom:70px" ng-repeat="member in members">
+		<h4> {{ member.name }} </h4>
+		<h5> {{ member.role }} </h5>
+		<h6> {{ member.contact }} </h6>
+		<img src="{{ member.pic }}" class="img-circle"><br><br>
+		<p> {{ member.bio }} </p>
 	</div>
 </div>

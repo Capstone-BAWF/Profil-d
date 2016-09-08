@@ -74,8 +74,14 @@ def Main():
 	timestamp = datetime.datetime.now()
 	db = client.profild
 	dbkey = "c^" + sys.argv[1] + "/" + sys.argv[2]
-	result = db.results.insert_one({"key": dbkey, "percentage": similarity,
-			"candidate": sys.argv[2], "user": sys.argv[1], "dateAdded": timestamp})
+	result = db.results.insert_one({
+				"key": dbkey, 
+				"percentage": similarity,
+				"candidate": sys.argv[2], 
+				"user": sys.argv[1], 
+				"dateAdded": timestamp
+			  })
+	
 	print("Task completed.")
 
 Main()
