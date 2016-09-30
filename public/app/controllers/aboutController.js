@@ -2,6 +2,7 @@ angular.module('aboutController', [])
 
 .controller('aboutController', function($scope) {
     $scope.pageClass = 'page-about';
+	/*
     $scope.members = [
         { name: 'William Wu', role: 'Full Stack Developer',
             bio: 'Interested in mobile development, experienced in full stack\
@@ -24,5 +25,7 @@ angular.module('aboutController', [])
                   Oriented Development as a whole.',
             contact: 'bttroche@gmail.com',
             pic: '/assets/images/brandon.jpg' }
-    ];
+    ];*/
+
+
 }); 

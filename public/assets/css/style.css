@@ -9,7 +9,7 @@
 .page-home{ background: url("home.jpg") no-repeat center center fixed; background-size:cover; height:100%}
 .page-candidate{ background: url("candidates.jpg") no-repeat center center fixed; background-size:cover; height:auto}
 .page-result{ background: url("results.jpg") no-repeat center center fixed; background-size:cover; height:100%}
-.page-about{ background: url("about.jpg") no-repeat center center fixed; background-size:cover; height:auto} 
+.page-about{ background: url("about.jpg") no-repeat center center fixed; background-size:cover; height:100%} 
 
 .header-home{
 	color: white;
